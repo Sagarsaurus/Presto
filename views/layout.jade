@@ -3,7 +3,8 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='semantic/dist/semantic.css')
+    link(rel='stylesheet', href='/semantic/dist/semantic.css')
+
   body
     nav.ui.menu.inverted.navbar.page.grid(style="margin-bottom: 0px")
       // insert logo image here
@@ -20,3 +21,4 @@ html
         a.item
           i.users.icon
           | Businesses
+    block content
