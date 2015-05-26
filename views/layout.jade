@@ -5,4 +5,18 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='semantic/dist/semantic.css')
   body
-    block content
+    nav.ui.menu.inverted.navbar.page.grid(style="margin-bottom: 0px")
+      // insert logo image here
+      // title link will redirect to this page
+      a.brand.item(href="") #{title}
+      div.item
+        div.ui.icon.input
+          input(type="text", placeholder="Enter Zip Code")
+          i.search.link.icon
+      div.right.menu
+        a.item
+          i.user.icon
+          | Users
+        a.item
+          i.users.icon
+          | Businesses
