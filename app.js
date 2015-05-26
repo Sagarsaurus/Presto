@@ -8,11 +8,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+//this is a hardcoded URI.  When deploying to heroku, it's good practice to only use the environment value below, comment this line
+var uri = "mongodb://heroku_app37200894:v5dkslchjq8kthh48bu6cp310u@ds035702.mongolab.com:35702/heroku_app37200894";
+
+//uncomment this line and comment the line above, and the line that says "mongoose.connect(uri)" when deploying to heroku
+//mongoose.connect(process.env.MONGOLAB_URI);
+
+//comment this line when deploying to heroku
+mongoose.connect(uri);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
