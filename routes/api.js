@@ -11,7 +11,7 @@ var geo = require('geoip-lite');
 var api = {
     getLocation: function(req, res) {
         ipify(function (err, ip) {
-            res.status(200).send({message: geo.lookup(ip).ll});
+            res.status(200).send({message: geo.lookup(ip)});
         });
     }
 };
