@@ -1,4 +1,8 @@
-var express = require('express');
+var express = require('express')
+  , passport = require('passport')
+  , util = require('util')
+  , BearerStrategy = require('passport-http-bearer').Strategy;
+
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -33,6 +37,16 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+
+function findByToken(token, fn) {
+  for (var i = 0, len = users.length; i < len; i++) {
+    var user = users[i];
+    if (user.token === token) {
+      return fn(null, user);
+    }
+  }
+  return fn(null, null);
+}
 
 // development error handler
 // will print stacktrace
