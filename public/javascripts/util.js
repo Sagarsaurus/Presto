@@ -21,13 +21,13 @@ function handle_errors(error)
 {
     switch(error.code)
     {
-        case error.PERMISSION_DENIED: alert("user did not share geolocation data");
+        case error.PERMISSION_DENIED: alert("We could not gather your location.  Please make sure location services are enabled in your browser.");
             break;
 
-        case error.POSITION_UNAVAILABLE: alert("could not detect current position");
+        case error.POSITION_UNAVAILABLE: alert("Unable to detect current position.");
             break;
 
-        case error.TIMEOUT: alert("retrieving position timed out");
+        case error.TIMEOUT: alert("Timed out trying to detect current position.");
             break;
 
         default: alert("unknown error");
