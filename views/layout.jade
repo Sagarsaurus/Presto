@@ -3,22 +3,25 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/layoutMain.css')
     link(rel='stylesheet', href='/semantic/dist/semantic.css')
+    link(href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300&subset=latin,vietnamese", rel="stylesheet", type="text/css")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/javascript/semantic.min.js")
 
   body
-    nav.ui.menu.inverted.navbar.page.grid(style="margin-bottom: 0px")
-      // insert logo image here
-      // title link will redirect to this page
-      a.brand.item(href="") #{title}
-      div.item
-        div.ui.icon.input
-          input(type="text", placeholder="Enter Zip Code")
-          i.search.link.icon
-      div.right.menu
-        a.item
-          i.user.icon
-          | Users
-        a.item
-          i.users.icon
-          | Businesses
-    block content
+    div.ui.grid
+      div.computer.tablet.only.row
+        div.ui.inverted.menu.navbar.page.grid
+          // insert logo here
+          a.brand.item(href="") #{title}
+          div.item
+            div.ui.icon.input
+              input(type="text", placeholder="Search...")
+              i.search.link.icon
+          div.right.menu
+            a.item
+              i.user.icon
+              | Users
+            a.item
+              i.users.icon
+              | Businesses
