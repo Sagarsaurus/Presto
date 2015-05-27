@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a94103c2-4d5f-412b-8457-ac51a1d8732b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/api.js" afterPath="$PROJECT_DIR$/routes/api.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/npm-debug.log" afterPath="$PROJECT_DIR$/npm-debug.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Presto.iws" />
@@ -65,8 +62,8 @@
       <file leaf-file-name="api.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/api.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3360161" vertical-offset="58" max-vertical-offset="645">
-              <caret line="17" column="47" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.6639839" vertical-offset="0" max-vertical-offset="645">
+              <caret line="24" column="68" selection-start-line="24" selection-start-column="68" selection-end-line="24" selection-end-column="68" />
               <folding>
                 <element signature="e#0#45#0" expanded="false" />
               </folding>
@@ -417,7 +414,13 @@
       <option name="project" value="LOCAL" />
       <updated>1432692634419</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Boom, added news functionality.  Just pass what you want me to use as a search query (as a city parameter) and what type of news you want (options are rt_Business, rt_Entertainment, rt_Health, rt_Politics, rt_Sports, rt_US, rt_World, and rt_ScienceAndTechnology).  The first paramater has to be &quot;city&quot; and the second has to be &quot;newsType&quot;.  Post this to /api/getNews and a json result will be returned.">
+      <created>1432755181823</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1432755181823</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -426,7 +429,7 @@
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32992327" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992327" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -435,7 +438,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992327" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32992327" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -471,7 +474,8 @@
     <MESSAGE value="Merged some conflicts.  Handled geolocation which works pretty well!  Click button on homepage to find your location, throw it into google maps to see how close it is for now, will draw results later." />
     <MESSAGE value="Having some issues on my mobile device but it may not be an issue everywhere." />
     <MESSAGE value="Fixed issues on mobile device.  Location services have to be enabled in browser." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed issues on mobile device.  Location services have to be enabled in browser." />
+    <MESSAGE value="Boom, added news functionality.  Just pass what you want me to use as a search query (as a city parameter) and what type of news you want (options are rt_Business, rt_Entertainment, rt_Health, rt_Politics, rt_Sports, rt_US, rt_World, and rt_ScienceAndTechnology).  The first paramater has to be &quot;city&quot; and the second has to be &quot;newsType&quot;.  Post this to /api/getNews and a json result will be returned." />
+    <option name="LAST_COMMIT_MESSAGE" value="Boom, added news functionality.  Just pass what you want me to use as a search query (as a city parameter) and what type of news you want (options are rt_Business, rt_Entertainment, rt_Health, rt_Politics, rt_Sports, rt_US, rt_World, and rt_ScienceAndTechnology).  The first paramater has to be &quot;city&quot; and the second has to be &quot;newsType&quot;.  Post this to /api/getNews and a json result will be returned." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -612,8 +616,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3360161" vertical-offset="58" max-vertical-offset="645">
-          <caret line="17" column="47" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.6639839" vertical-offset="0" max-vertical-offset="645">
+          <caret line="24" column="68" selection-start-line="24" selection-start-column="68" selection-end-line="24" selection-end-column="68" />
           <folding>
             <element signature="e#0#45#0" expanded="false" />
           </folding>

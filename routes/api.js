@@ -23,9 +23,9 @@ var api = {
                                         //   rt_US
                                         //   rt_World
                                         //   rt_ScienceAndTechnology
-        }, function(error, res, body){
-            if(error) {
-                response.status(500).send({error: error});
+        }, function(errorMessage, res, body){
+            if(errorMessage) {
+                response.status(500).send({error: errorMessage});
             }
             else {
                 response.status(200).send({message: body});
