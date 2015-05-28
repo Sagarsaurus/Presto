@@ -55,9 +55,7 @@ function updateNews(city) {
     }
 
     toSet+='</div>';
-    console.log(toSet);
     news.innerHTML = toSet;
-    //console.log(response);
 }
 
 function updateFood(city) {
@@ -81,7 +79,5 @@ function updateFood(city) {
     }
 
     toSet+='</div>';
-    console.log(toSet);
     food.innerHTML = toSet;
-    //console.log(response);
 }
