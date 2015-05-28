@@ -51,7 +51,7 @@ function updateNews(city) {
     var toSet = "";
     for(var i = 0; i < response['message']['d']['results'].length; i++) {
         var item = response['message']['d']['results'][i];
-        toSet+='<div class="item"> <i class="newspaper icon"></i> <div class="content"> <a class="header">'+item['Title']+'</a> <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div> </div> </div>';
+        toSet+='<div class="item"> <i class="newspaper icon"></i> <div class="content"> <a class="header" href="'+item['Url']+'">'+item['Title']+'</a> <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div> </div> </div>';
     }
 
     toSet+='</div>';
