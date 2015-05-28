@@ -15,7 +15,6 @@ function showPosition(position) {
     //console.log(latitude);
     //console.log(longitude);
     alert("Latitude is: "+latitude+"\nand Longitude is: "+longitude);
-    updateNews('Atlanta');
 }
 
 function handle_errors(error)
@@ -42,7 +41,6 @@ function updateNews(city) {
     var nameValuePairs = 'city='+city;
     xmlhttp.open("POST", "api/getNews", false); //AJAX Set request
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-   // xmlhttp.setRequestHeader("Content-length", nameValuePairs.length);
     xmlhttp.send(nameValuePairs);
 
     var response = JSON.parse(xmlhttp.responseText);

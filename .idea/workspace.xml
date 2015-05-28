@@ -40,8 +40,8 @@
       <file leaf-file-name="util.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/util.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0681819" vertical-offset="248" max-vertical-offset="990">
-              <caret line="53" column="143" selection-start-line="53" selection-start-column="143" selection-end-line="53" selection-end-column="143" />
+            <state vertical-scroll-proportion="0.46487603" vertical-offset="0" max-vertical-offset="960">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc;n#getLocation#0" expanded="false" />
               </folding>
@@ -426,7 +426,13 @@
       <option name="project" value="LOCAL" />
       <updated>1432779863183</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added links to navigate to for news.">
+      <created>1432780649856</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1432780649856</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -482,7 +488,8 @@
     <MESSAGE value="Fixed issues on mobile device.  Location services have to be enabled in browser." />
     <MESSAGE value="Boom, added news functionality.  Just pass what you want me to use as a search query (as a city parameter) and what type of news you want (options are rt_Business, rt_Entertainment, rt_Health, rt_Politics, rt_Sports, rt_US, rt_World, and rt_ScienceAndTechnology).  The first paramater has to be &quot;city&quot; and the second has to be &quot;newsType&quot;.  Post this to /api/getNews and a json result will be returned." />
     <MESSAGE value="Got news to show up on homepage, has to be hooked up to dropdown, sunny should work on that." />
-    <option name="LAST_COMMIT_MESSAGE" value="Got news to show up on homepage, has to be hooked up to dropdown, sunny should work on that." />
+    <MESSAGE value="Added links to navigate to for news." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added links to navigate to for news." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -707,8 +714,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/util.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0681819" vertical-offset="248" max-vertical-offset="990">
-          <caret line="53" column="143" selection-start-line="53" selection-start-column="143" selection-end-line="53" selection-end-column="143" />
+        <state vertical-scroll-proportion="0.46487603" vertical-offset="0" max-vertical-offset="960">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc;n#getLocation#0" expanded="false" />
           </folding>
