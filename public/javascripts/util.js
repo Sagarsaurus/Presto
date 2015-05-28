@@ -19,6 +19,15 @@ function showPosition(position) {
     updateFood("Atlanta");
 }
 
+$(document).ready(function(){
+    $('.ui.dropdown').dropdown({
+        function (city) {
+            city = document.getElementById("item").value;
+            updateNews(city);
+        }
+    });
+});
+
 function handle_errors(error)
 {
     switch(error.code)
