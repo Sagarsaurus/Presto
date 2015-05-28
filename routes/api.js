@@ -31,10 +31,30 @@ var api = {
                 response.status(200).send({message: body});
             }
         });
+    },
+
+    getFood: function(req, response) {
+        var yelp = require("yelp").createClient({
+            consumer_key: "JwN_Os8j4VRnuPV8j_TITQ",
+            consumer_secret: "pGJ3NJd0T8YaGG5x1JSfiLyIQws",
+            token: "JVLRsJxbzgWN_9xdbXwGHvWyQwkM2NZN",
+            token_secret: "vR1eqDCCYrG7LEOZQygl_NMHmWY"
+        });
+
+        // See http://www.yelp.com/developers/documentation/v2/search_api
+        yelp.search({term: "food", location: req.body.city, sort: 2}, function(err, data) {
+            if(err) {
+                response.status(500).send({error: err});
+            }
+            else {
+                response.status(200).send({message: data});
+            }
+        });
     }
 };
 
 
 router.post('/getNews', api.getNews);
+router.post('/getFood', api.getFood);
 
 module.exports = router;

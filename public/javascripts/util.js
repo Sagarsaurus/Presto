@@ -14,7 +14,9 @@ function showPosition(position) {
     var longitude = position.coords.longitude;
     //console.log(latitude);
     //console.log(longitude);
-    alert("Latitude is: "+latitude+"\nand Longitude is: "+longitude);
+    //alert("Latitude is: "+latitude+"\nand Longitude is: "+longitude);
+    updateNews("Atlanta");
+    updateFood("Atlanta");
 }
 
 function handle_errors(error)
@@ -46,15 +48,40 @@ function updateNews(city) {
     var response = JSON.parse(xmlhttp.responseText);
     var news = document.getElementById('news');
     document.getElementById('newsDiv').style.visibility="visible";
-    var toSet = "";
+    var toSet = '<a class="ui massive red label">Local News</a> <br/><br/>';
     for(var i = 0; i < response['message']['d']['results'].length; i++) {
         var item = response['message']['d']['results'][i];
         toSet+='<div class="item"> <i class="newspaper icon"></i> <div class="content"> <a class="header" href="'+item['Url']+'">'+item['Title']+'</a> <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div> </div> </div>';
     }
 
     toSet+='</div>';
+    console.log(toSet);
     news.innerHTML = toSet;
+    //console.log(response);
 }
 
+function updateFood(city) {
+    var xml = new XMLHttpRequest();
+    var nameValuePairs = 'city='+city;
+    xml.open("POST", "api/getFood", false); //AJAX Set request
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.send(nameValuePairs);
 
+    var response = JSON.parse(xml.responseText);
+    var food = document.getElementById('food');
+    document.getElementById('foodDiv').style.visibility="visible";
+    var toSet = '<a class="ui massive red label">Local Dining</a> <br/><br/>';
+    for(var i = 0; i < response['message']['businesses'].length; i++) {
+        var item = response['message']['businesses'][i];
+        toSet+='<div class="item"> <i class="food icon"></i> <div class="content"> <a class="header" href="'+item['url']+'">'+item['name']+'</a> <div class="list">';
+        for(var j = 0; j < item['categories'].length; j++) {
+            toSet+='<div class="item"> <i class="right triangle icon"></i>   <div class="content"> <div class="description">'+item['categories'][j][0]+'</div> </div> </div>';
+        }
+        toSet+='<div class="item"> <i class="star icon"></i> <div class="content" style="color: red">'+item['rating']+' Star Rating! </div> </div> </div> </div> </div>';
+    }
 
+    toSet+='</div>';
+    console.log(toSet);
+    food.innerHTML = toSet;
+    //console.log(response);
+}
