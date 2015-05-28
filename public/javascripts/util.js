@@ -15,6 +15,7 @@ function showPosition(position) {
     //console.log(latitude);
     //console.log(longitude);
     alert("Latitude is: "+latitude+"\nand Longitude is: "+longitude);
+    updateNews('Atlanta');
 }
 
 function handle_errors(error)
@@ -34,5 +35,28 @@ function handle_errors(error)
             break;
     }
 }
+
+//update this to take in news type in the future, remove call in showPosition once sunny finishes dropdown
+function updateNews(city) {
+    var xmlhttp = new XMLHttpRequest();
+    var nameValuePairs = 'city='+city;
+    xmlhttp.open("POST", "api/getNews", false); //AJAX Set request
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   // xmlhttp.setRequestHeader("Content-length", nameValuePairs.length);
+    xmlhttp.send(nameValuePairs);
+
+    var response = JSON.parse(xmlhttp.responseText);
+    var news = document.getElementById('news');
+    document.getElementById('newsDiv').style.visibility="visible";
+    var toSet = "";
+    for(var i = 0; i < response['message']['d']['results'].length; i++) {
+        var item = response['message']['d']['results'][i];
+        toSet+='<div class="item"> <i class="newspaper icon"></i> <div class="content"> <a class="header">'+item['Title']+'</a> <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div> </div> </div>';
+    }
+
+    toSet+='</div>';
+    news.innerHTML = toSet;
+}
+
 
 

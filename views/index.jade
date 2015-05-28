@@ -2,3 +2,7 @@ extends layout
 
 block content
     input.ui.red.button(type="button", value="Find Your Location", onclick="getLocation()")
+    div.ui.three.column.middle.aligned.relaxed.fitted.stackable.grid
+        div.center.aligned.column
+            div.ui.inverted.segment(id="newsDiv", style="visibility: hidden")
+                div.ui.inverted.relaxed.divided.list(id='news')
