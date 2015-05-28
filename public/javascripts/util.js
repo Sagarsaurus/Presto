@@ -17,6 +17,15 @@ function showPosition(position) {
     alert("Latitude is: "+latitude+"\nand Longitude is: "+longitude);
 }
 
+$(document).ready(function(){
+    $('.ui.dropdown').dropdown({
+        function (city) {
+            city = document.getElementById("item").value;
+            updateNews(city);
+        }
+    });
+});
+
 function handle_errors(error)
 {
     switch(error.code)
