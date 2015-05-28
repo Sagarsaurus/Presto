@@ -57,7 +57,7 @@ function updateNews(city) {
     var response = JSON.parse(xmlhttp.responseText);
     var news = document.getElementById('news');
     document.getElementById('newsDiv').style.visibility="visible";
-    var toSet = '<a class="ui massive red label">Local News</a> <br/><br/>';
+    var toSet = '<div class="ui massive red label">Local News</div> <br/><br/>';
     for(var i = 0; i < response['message']['d']['results'].length; i++) {
         var item = response['message']['d']['results'][i];
         toSet+='<div class="item"> <i class="newspaper icon"></i> <div class="content"> <a class="header" href="'+item['Url']+'">'+item['Title']+'</a> <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div> </div> </div>';
@@ -77,7 +77,7 @@ function updateFood(city) {
     var response = JSON.parse(xml.responseText);
     var food = document.getElementById('food');
     document.getElementById('foodDiv').style.visibility="visible";
-    var toSet = '<a class="ui massive red label">Local Dining</a> <br/><br/>';
+    var toSet = '<div class="ui massive red label">Local Dining</div> <br/><br/>';
     for(var i = 0; i < response['message']['businesses'].length; i++) {
         var item = response['message']['businesses'][i];
         toSet+='<div class="item"> <i class="food icon"></i> <div class="content"> <a class="header" href="'+item['url']+'">'+item['name']+'</a> <div class="list">';
