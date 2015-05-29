@@ -14,19 +14,8 @@ function showPosition(position) {
     var longitude = position.coords.longitude;
     //console.log(latitude);
     //console.log(longitude);
-    //alert("Latitude is: "+latitude+"\nand Longitude is: "+longitude);
-    updateNews("Atlanta");
-    updateFood("Atlanta");
+    //alert("Latitude is: "+latitude+"\nand Longitude is: "+longitude);;
 }
-
-//$(document).ready(function(){
-//    $('.ui.dropdown').dropdown({
-//        function (city) {
-//            city = document.getElementById("item").value;
-//            updateNews(city);
-//        }
-//    });
-//});
 
 function handle_errors(error)
 {
@@ -89,4 +78,11 @@ function updateFood(city) {
 
     toSet+='</div>';
     food.innerHTML = toSet;
+}
+
+
+//janky fix
+function updateInformation(city) {
+    updateNews(city);
+    updateFood(city);
 }

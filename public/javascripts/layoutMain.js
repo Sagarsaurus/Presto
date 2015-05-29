@@ -1,3 +1,5 @@
-$(document).ready(function () {
-	$('.ui.dropdown.item').dropdown();
-})
+function dropDamnYou() {
+	$('[data-dropdown]').each(function(){
+		$(this).dropdown();
+	});
+}

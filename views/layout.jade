@@ -5,35 +5,61 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/layoutMain.css')
     link(rel='stylesheet', href='/semantic/dist/semantic.css')
+    link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.css')
     link(href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300&subset=latin,vietnamese", rel="stylesheet", type="text/css")
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
     script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js")
-    script(src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/javascript/semantic.min.js")
+    //script(src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/javascript/semantic.min.js")
+    script(src="/bootstrap/dist/js/bootstrap.js")
     script(src='javascripts/util.js')
     script(src='javascripts/layoutMain.js')
+
   body
-    div.ui.grid
-      div.computer.tablet.only.row
-        div.ui.inverted.menu.navbar.page.grid
-          // insert logo here
-          a.brand.item(href="") #{title}
-          a.ui.dropdown.item
-            | Choose City
-            i.dropdown.icon
-            div.menu
-              div.item(data-value="Atlanta") Atlanta
-              div.item(data-value="Seattle") Seattle
-              div.item(data-value="San Francisco") San Francisco
-              div.item(data-value="San Antonio") San Antonio
-              div.item(data-value="Sand Diego") San Diego
-              div.item(data-value="Los Angeles") Los Angeles
-              div.item(data-value="New York") New York
-              div.item(data-value="Washington D.C") Washington D.C
-          div.right.menu
-            a.item
-              i.user.icon
-              | Users
-            a.item
-              i.users.icon
-              | Businesses
+    nav.navbar.navbar-default
+      div.container-fluid
+        div.navbar-header
+          a.navbar-brand(href='/') Presto
+        div.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.dropdown
+              a.dropdown-toggle(data-toggle='dropdown', role='button', aria-expanded="false") Choose a City
+                span.caret
+              ul.dropdown-menu(role='menu')
+                li
+                  a(onclick="updateInformation('Atlanta')") Atlanta
+                li.divider
+                li
+                  a(onclick="updateInformation('San Francisco')") San Francisco
+                li.divider
+                li
+                  a(onclick="updateInformation('Philadelphia')") Philadelphia
+          ul.nav.navbar-nav.navbar-right
+            li
+              a Individuals
+            li
+              a Companies
+    //div.ui.grid
+    //  div.computer.tablet.only.row
+    //    div.ui.inverted.menu.navbar.page.grid
+    //      // insert logo here
+    //      a.brand.item(href="") #{title}
+    //      a.ui.dropdown.item(onclick="dropDamnYou()", id="cityDropdown")
+    //        | Choose City
+    //        i.dropdown.icon
+    //        div.menu
+    //          div.item(data-value="Atlanta") Atlanta
+    //          div.item(data-value="Seattle") Seattle
+    //          div.item(data-value="San Francisco") San Francisco
+    //          div.item(data-value="San Antonio") San Antonio
+    //          div.item(data-value="Sand Diego") San Diego
+    //          div.item(data-value="Los Angeles") Los Angeles
+    //          div.item(data-value="New York") New York
+    //          div.item(data-value="Washington D.C") Washington D.C
+    //      div.right.menu
+    //        a.item
+    //          i.user.icon
+    //          | Users
+    //        a.item
+    //          i.users.icon
+    //          | Businesses
     block content
