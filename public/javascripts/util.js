@@ -80,6 +80,16 @@ function updateFood(city) {
     food.innerHTML = toSet;
 }
 
+function updateEvents(city, typeOfEvent) {
+    var xml = new XMLHttpRequest();
+    var nameValuePairs = 'city='+city+'&typeOfEvent='+typeOfEvent;
+    xml.open("POST", "api/getEvents", false); //AJAX Set request
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.send(nameValuePairs);
+
+    var response = JSON.parse(xml.responseText);
+    return response;
+}
 
 //janky fix
 function updateInformation(city) {
