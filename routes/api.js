@@ -2,11 +2,14 @@
  * Created by sagarsaurus on 5/26/15.
  */
 //add code for models and api here
+
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var eventful = require('eventful-node');
 var client = new eventful.Client('r9GWjC5WKhRRZwfC');
+
+mongoose.model("Deal", {description : String, industry : String, affiliated_with : String, city: String, posted_by: String, latitude: Number, longitude: Number, valid_until: Date });
 
 var api = {
     getNews: function(req, response) {
@@ -80,6 +83,30 @@ var api = {
             }
 
         });
+    },
+
+    addDeal: function(req, response) {
+        //need to add support to make sure duplicate does not exist
+        //perhaps add upvote system for deals so best ones are towards top?
+        var Deal = mongoose.model('Deal');
+        var toAdd = new Deal({
+            description : req.body.description,
+            industry: req.body.industry,
+            affiliated_with: req.body.affiliated_with,
+            posted_by: req.body.posted_by,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
+            valid_until: req.body.valid_until
+        });
+
+        toAdd.save(function(err) {
+            if(err) {
+                response.status(500).send({error: err});
+            }
+            else {
+                response.status(200).send({message: 'success'});
+            }
+        });
     }
 };
 
@@ -87,5 +114,6 @@ var api = {
 router.post('/getNews', api.getNews);
 router.post('/getFood', api.getFood);
 router.post('/getEvents', api.getEvents);
+router.post('/addDeal', api.addDeal);
 
 module.exports = router;
