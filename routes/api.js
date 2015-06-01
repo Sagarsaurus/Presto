@@ -8,6 +8,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var eventful = require('eventful-node');
 var client = new eventful.Client('r9GWjC5WKhRRZwfC');
+var geolib = require('geolib');
 
 mongoose.model("Deal", {description : String, industry : String, affiliated_with : String, city: String, posted_by: String, latitude: Number, longitude: Number, valid_until: Date });
 
@@ -107,6 +108,28 @@ var api = {
                 response.status(200).send({message: 'success'});
             }
         });
+    },
+
+    getDeals: function(req, response) {
+        var model = mongoose.model('Deal');
+        model.find({}, function(err, coll) {
+            if(err) {
+                response.status(500).send({error: err});
+            }
+
+            else {
+                for (i in coll) {
+                    var elem = coll[i];
+                    var lat = elem.latitude;
+                    var long = elem.longitude;
+                    if(geolib.getDistance({latitude: lat, longitude: long}, {latitude: parseFloat(req.body.latitude), longitude: parseFloat(req.body.longitude)}) > (req.body.radius*1609)) {
+                        coll.splice(i, 1);
+                    }
+                }
+
+                response.status(200).send({message: coll});
+            }
+        });
     }
 };
 
@@ -115,5 +138,6 @@ router.post('/getNews', api.getNews);
 router.post('/getFood', api.getFood);
 router.post('/getEvents', api.getEvents);
 router.post('/addDeal', api.addDeal);
+router.post('/getDeals', api.getDeals);
 
 module.exports = router;
