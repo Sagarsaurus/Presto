@@ -16,6 +16,10 @@ var api = {
     getNews: function(req, response) {
         var Bing = require('node-bing-api')({ accKey: "khQagi4FvTxYWH52NvNtr3DO5Cud1mfLyL9VzXFF9Us" });
 
+        if(req.body.city.length == 0 || req.body.newsType.length == 0) {
+            response.status(500).send({error: "Please make sure to provide all API parameters"});
+        }
+
         Bing.news(req.body.city, {
             top: 50,  // Number of results (max 50)
             skip: 0,   // Skip first 3 results
@@ -40,6 +44,10 @@ var api = {
     },
 
     getFood: function(req, response) {
+        if(req.body.city.length==0) {
+            response.status(500).send({error: "Please make sure to provide all API parameters"});
+        }
+
         var yelp = require("yelp").createClient({
             consumer_key: "JwN_Os8j4VRnuPV8j_TITQ",
             consumer_secret: "pGJ3NJd0T8YaGG5x1JSfiLyIQws",
@@ -59,6 +67,11 @@ var api = {
     },
 
     getEvents: function(req, response) {
+        if(req.body.city.length==0 || req.body.typeOfEvent.length==0) {
+            response.status(500).send({error: "Please make sure to provide all API parameters"});
+
+        }
+
         client.searchEvents({ keywords: req.body.city+'   '+req.body.typeOfEvent }, function(err, data){
 
             if(err){
@@ -89,6 +102,10 @@ var api = {
     addDeal: function(req, response) {
         //need to add support to make sure duplicate does not exist
         //perhaps add upvote system for deals so best ones are towards top?
+        if(req.body.description.length==0 ||  req.body.industry.length==0 || req.body.affiliated_with.length==0 || req.body.posted_by.length==0 || req.body.latitude.length==0 || req.body.longitude == 0 || req.body.valid_until==0) {
+            response.status(500).send({error: "Please make sure to provide all API parameters"});
+        }
+
         var Deal = mongoose.model('Deal');
         var toAdd = new Deal({
             description : req.body.description,
