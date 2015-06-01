@@ -45,6 +45,7 @@
     "mongoose": "^4.0.3",
     "morgan": "~1.5.3",
     "node-bing-api": "^2.0.0",
+    "passport": "^0.2.2",
     "passport-facebook": "^2.0.0",
     "passport-google-oauth": "^0.2.0",
     "passport-http-bearer": "^1.0.1",
