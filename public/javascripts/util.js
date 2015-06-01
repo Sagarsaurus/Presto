@@ -36,9 +36,9 @@ function handle_errors(error)
 }
 
 //update this to take in news type in the future, remove call in showPosition once sunny finishes dropdown
-function updateNews(city) {
+function updateNews(city, newsType) {
     var xmlhttp = new XMLHttpRequest();
-    var nameValuePairs = 'city='+city;
+    var nameValuePairs = 'city='+city+'&newsType='+newsType;
     xmlhttp.open("POST", "api/getNews", false); //AJAX Set request
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(nameValuePairs);
@@ -93,6 +93,6 @@ function updateEvents(city, typeOfEvent) {
 
 //janky fix
 function updateInformation(city) {
-    updateNews(city);
+    updateNews(city, 'rt_US');
     updateFood(city);
 }
