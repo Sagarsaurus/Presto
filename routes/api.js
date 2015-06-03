@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var eventful = require('eventful-node');
 var client = new eventful.Client('r9GWjC5WKhRRZwfC');
 var geolib = require('geolib');
+var GooglePlaces = require('google-places');
 
 mongoose.model("Deal", {description : String, industry : String, affiliated_with : String, city: String, posted_by: String, latitude: Number, longitude: Number, valid_until: Date });
 

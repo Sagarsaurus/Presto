@@ -9,11 +9,12 @@ html
     link(href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300&subset=latin,vietnamese", rel="stylesheet", type="text/css")
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
     script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js")
+    script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?libraries=places')
     //script(src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/javascript/semantic.min.js")
     script(src="/bootstrap/dist/js/bootstrap.js")
     script(src='/javascripts/util.js')
 
-  body
+  body(onload="getLocation()")
     nav.navbar.navbar-default
       div.container-fluid
         div.navbar-header
