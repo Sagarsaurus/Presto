@@ -3,18 +3,16 @@
  */
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, handle_errors);
+        navigator.geolocation.getCurrentPosition(reportLocation, handle_errors);
     }   else {
         alert("Geolocation is not supported by this browser.");
     }
 }
 
-function showPosition(position) {
+function reportLocation(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
-    //console.log(latitude);
-    //console.log(longitude);
-    //alert("Latitude is: "+latitude+"\nand Longitude is: "+longitude);;
+    //do something with coordinates, perhaps return as string
 }
 
 function handle_errors(error)
