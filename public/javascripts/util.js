@@ -127,7 +127,8 @@ function callback(results, status) {
 }
 
 //this is good for now, can adjust for latitude and longitude queries later as api handles them
-function getWeather(city, numberOfDays) {
+//added params for lat and long, but have to add boolean flag to denote whether or not we're using the city or lat and long.
+function getWeather(city, numberOfDays, lat, long, usingCity) {
     var xml = new XMLHttpRequest();
     var apiString = 'http://api.openweathermap.org/data/2.5/forecast/daily?q='+city+'&cnt='+numberOfDays+'&mode=json&units=imperial&APPID=18bfea6c2bf42a53f86122f302260512';
     console.log(apiString);
