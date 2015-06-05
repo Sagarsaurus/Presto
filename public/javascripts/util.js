@@ -126,6 +126,19 @@ function callback(results, status) {
     }
 }
 
+//this is good for now, can adjust for latitude and longitude queries later as api handles them
+function getWeather(city, numberOfDays) {
+    var xml = new XMLHttpRequest();
+    var apiString = 'http://api.openweathermap.org/data/2.5/forecast/daily?q='+city+'&cnt='+numberOfDays+'&mode=json&units=imperial&APPID=18bfea6c2bf42a53f86122f302260512';
+    console.log(apiString);
+    xml.open("GET", apiString, false); //AJAX Set request
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.send();
+    var response = JSON.parse(xml.responseText);
+    return response;
+}
+
+
 //janky fix
 function updateInformation(city) {
     updateNews(city, 'rt_US');
