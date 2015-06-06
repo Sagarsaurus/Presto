@@ -17,7 +17,6 @@ function reportLocation(position) {
     var longitude = position.coords.longitude;
     this.latitude = latitude;
     this.longitude = longitude;
-    //do something with coordinates, perhaps return as string
 }
 
 function handle_errors(error)
@@ -94,6 +93,8 @@ function updateEvents(city, typeOfEvent) {
     return response;
 }
 
+//function which gathers information about several different local elements, look at list at top to see potential options
+//pass in options as a list: for example, ['food', 'church'], etc
 //enter radius in miles, i'll handle the rest
 function updateLocalLocations(rad, options) {
     var center = new google.maps.LatLng(parseFloat(this.latitude), parseFloat(this.longitude));
@@ -109,15 +110,11 @@ function updateLocalLocations(rad, options) {
         rankBy: google.maps.places.RankBy.PROMINENCE
     };
     var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch(request, callback);
+    service.nearbySearch(request, success);
 }
 
-function callback(results, status) {
+function success(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        //for (var i = 0; i < results.length; i++) {
-        //    var place = results[i];
-        //    createMarker(results[i]);
-        //}
         return results;
     }
 
@@ -127,8 +124,7 @@ function callback(results, status) {
 }
 
 //this is good for now, can adjust for latitude and longitude queries later as api handles them
-//added params for lat and long, but have to add boolean flag to denote whether or not we're using the city or lat and long.
-function getWeather(city, numberOfDays, lat, long, usingCity) {
+function getWeather(city, numberOfDays) {
     var xml = new XMLHttpRequest();
     var apiString = 'http://api.openweathermap.org/data/2.5/forecast/daily?q='+city+'&cnt='+numberOfDays+'&mode=json&units=imperial&APPID=18bfea6c2bf42a53f86122f302260512';
     console.log(apiString);
