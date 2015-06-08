@@ -57,7 +57,7 @@ var api = {
         });
 
 
-        if(req.body.coordinates.length > 0) {
+        if(req.body.coordinates != null) {
             yelp.search({term: "food", location: req.body.city, cll: req.body.coordinates, sort: 2}, function(err, data) {
                 if(err) {
                     response.status(500).send({error: err});

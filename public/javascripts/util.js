@@ -128,20 +128,17 @@ function updateNews(city, newsType) {
     newsStuff = toSet;
 }
 
+//add support soon to allow them to order results by either distance or highest rating.  Filtering by cuisine should be done on the front end itself.
 var foodHtml;
 function updateFood(city, lat, long) {
-    console.log(lat);
-    console.log(long);
     var nameValuePairs = "";
     if(lat != null && long != null) {
-        nameValuePairs = 'city='+city+'&coordinates='+lat+',='+long;
+        nameValuePairs = 'city='+city+'&coordinates='+lat+','+long;
     }
     else {
         nameValuePairs = 'city='+city;
-
     }
 
-    console.log(nameValuePairs);
 
     var xml = new XMLHttpRequest();
     xml.open("POST", "api/getFood", false); //AJAX Set request
