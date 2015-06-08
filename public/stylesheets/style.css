@@ -1,8 +1,193 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+    font: 14px "Roboto", sans-serif !important;
+    font-family: "Roboto", sans-serif !important;
+    font-weight: 300 !important;
 }
 
 a {
   color: #00B7FF;
+}
+
+.ui.button {
+    width:100% !important;
+    font-size: large !important;
+}
+
+.topContainer {
+    margin-right: 40em;
+    margin-left: 40em;
+}
+
+/*******************************
+              Shape
+*******************************/
+
+.ui.shape {
+    position: relative;
+    display: inline-block;
+    -webkit-perspective: 2000px;
+    perspective: 2000px;
+}
+.ui.shape .sides {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.ui.shape .side {
+    opacity: 1;
+    width: 100%;
+    margin: 0em !important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.ui.shape .side {
+    display: none;
+}
+.ui.shape .side > * {
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+}
+
+
+/*******************************
+             Types
+*******************************/
+
+.ui.cube.shape .side {
+    min-width: 15em !important;
+    height: 15em !important;
+    padding: 2em !important;
+    background-color: #e6e6e6 !important;
+    color: rgba(0, 0, 0, 0.8) !important;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) !important;
+}
+.ui.cube.shape .side > .content {
+    width: 100% !important;
+    height: 100%!important;
+    display: table!important;
+    text-align: center!important;
+    -webkit-user-select: text!important;
+    -moz-user-select: text!important;
+    -ms-user-select: text!important;
+    user-select: text!important;
+}
+.ui.cube.shape .side > .content > div {
+    display: table-cell!important;
+    vertical-align: middle!important;
+    font-size: 2em!important;
+}
+
+
+/*******************************
+          Variations
+*******************************/
+
+.ui.text.shape.animating .sides {
+    position: static!important;
+}
+.ui.text.shape .side {
+    white-space: nowrap!important;
+}
+.ui.text.shape .side > * {
+    white-space: normal!important;
+}
+
+
+/*******************************
+             States
+*******************************/
+
+
+/*--------------
+    Loading
+---------------*/
+
+.ui.loading.shape {
+    position: absolute!important;
+    top: -9999px!important;
+    left: -9999px!important;
+}
+
+/*--------------
+    Animating
+---------------*/
+
+.ui.shape .animating.side {
+    position: relative !important;
+    top: 0px!important;
+    left: 0px!important;
+    z-index: 100!important;
+}
+.ui.shape .hidden.side {
+    opacity: 0.4!important;
+}
+
+/*--------------
+      CSS
+---------------*/
+
+.ui.shape.animating {
+    -webkit-transition: all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+}
+.ui.shape.animating .sides {
+    position: absolute;
+}
+.ui.shape.animating .sides {
+    -webkit-transition: all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+}
+.ui.shape.animating .side {
+    -webkit-transition: opacity 0.6s ease-in-out;
+    transition: opacity 0.6s ease-in-out;
+}
+
+/*--------------
+     Active
+---------------*/
+
+.ui.shape .active.side {
+    display: block;
+}
+
+#newsContentLocation {
+    width: 90em !important;
+}
+
+#foodContentLocation {
+    width: 90em !important;
+}
+
+#foodContent {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#newsContent {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#eventContent {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#eventContentLocation {
+    width: 90em !important;
+}
+#infoDiv {
+    margin-left: -10em !important;
+}
+
+.item {
+    font-size: large;
+    /*text-align: left;*/
+}
+
+#messageHeader {
+    font-size:x-large;
+    font-family: "Roboto", sans-serif !important;
+    font-weight: 400 !important;
 }
