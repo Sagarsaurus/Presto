@@ -137,7 +137,6 @@ function updateFood(city) {
         //    toSet+='<div class="item"> <i class="right triangle icon"></i>   <div class="content"> <div class="description">'+item['categories'][j][0]+'</div> </div> </div>';
         //}
         toSet+='<div class="column" style="font-style: italic; font-size: large; width: 50%;"><div class="content">';
-        console.log(toSet);
         var parsedInt = parseInt(item['rating']);
         //console.log(parsedInt);
         for(var x = 0; x < parsedInt; x++) {
@@ -173,7 +172,6 @@ function updateLocalLocations(rad, options) {
         center: center,
         zoom: 15
     });
-    console.log(center);
     var request = {
         location: center,
         radius: rad*1609+'',
@@ -188,7 +186,6 @@ function updateLocalLocations(rad, options) {
 function getWeather(city, numberOfDays) {
     var xml = new XMLHttpRequest();
     var apiString = 'http://api.openweathermap.org/data/2.5/forecast/daily?q='+city+'&cnt='+numberOfDays+'&mode=json&units=imperial&APPID=18bfea6c2bf42a53f86122f302260512';
-    console.log(apiString);
     xml.open("GET", apiString, false); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send();
