@@ -18,34 +18,29 @@ block content
                         div.sides
                             div.active.side(id="foodContent")
                                 div.content(id="foodContentLocation")
-
                             div.side(id="newsContent")
                                 div.content(id="newsContentLocation")
-
                             div.side(id="eventContent")
                                 div.content(id="eventContentLocation")
-
-
     script.
         $('#food').click(function() {
-            $(".shape")
-                .shape('set next side', '#foodContent')
-                .shape('flip right');
+        $(".shape")
+            .shape('set next side', '#foodContent')
+            .shape('flip right');
             $("#foodContentLocation").html(foodHtml)
         });
-
         $('#news').click( function(){
             $('.shape')
-                .shape('set next side', '#newsContent')
-                .shape('flip right');
+            .shape('set next side', '#newsContent')
+            .shape('flip right');
             $("#newsContentLocation")
-                .html(newsStuff)
+            .html(newsStuff)
             //$("#newsContent").jscroll({
               //  autoTriggerUntil: 10, contentSelector: '.item'
             //})
         });
         $('#events').click(function() {
             $('.shape')
-                .shape('set next side', '#eventContent')
-                .shape('flip right');
+            .shape('set next side', '#eventContent')
+            .shape('flip right');
         });

@@ -62,16 +62,16 @@ function updateNews(city, newsType) {
 
         // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
         toSet+='<div class="item"> ' +
-                    '<div class="content"> ' +
-                        //'<div class="ui grid">'+
-                        //    "<div class='column'>"+
-                                '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
-                        //    "</div>"+
-                        //    "<div class='column'>"+
-                        //        "<span></span>"+
-                        //    "</div>"+
-                        //"</div>"+
-                    '</div> ' +
+            '<div class="content"> ' +
+                //'<div class="ui grid">'+
+                //    "<div class='column'>"+
+            '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //    "</div>"+
+                //    "<div class='column'>"+
+                //        "<span></span>"+
+                //    "</div>"+
+                //"</div>"+
+            '</div> ' +
             '</div><hr>';
         //var $element =$('<div class="item"> ' +
         //    '<div class="content"> ' +
@@ -123,16 +123,16 @@ function updateFood(city) {
     for(var i = 0; i < responseList.length; i++) {
         var item = responseList[i];
         toSet+='<div class="item"> ' +
-                    '<div class="content"> <div class="ui grid" style="width:100%; text-align: center;"> <div class="column" style="font-size: large; width: 50%;">' +
+            '<div class="content"> <div class="ui grid" style="width:100%; text-align: center;"> <div class="column" style="font-size: large; width: 50%;">' +
                 //'<div class="ui grid">'+
                 //    "<div class='column'>"+
-                         '<a class="header" href="'+item['url']+'">'+item['name']+'</a> ' +
+            '<a class="header" href="'+item['url']+'">'+item['name']+'</a> ' +
                 //    "</div>"+
                 //    "<div class='column'>"+
                 //        "<span></span>"+
                 //    "</div>"+
                 //"</div>"+
-                    '</div> ';
+            '</div> ';
         //for(var j = 0; j < item['categories'].length; j++) {
         //    toSet+='<div class="item"> <i class="right triangle icon"></i>   <div class="content"> <div class="description">'+item['categories'][j][0]+'</div> </div> </div>';
         //}

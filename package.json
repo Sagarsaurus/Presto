@@ -17,6 +17,7 @@
     "express": "~4.12.4",
     "extend": "^2.0.1",
     "geolib": "^2.0.14",
+    "google-places": "0.0.2",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.3.0",
     "gulp-chmod": "^1.2.0",
