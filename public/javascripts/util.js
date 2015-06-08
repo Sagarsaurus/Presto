@@ -205,6 +205,16 @@ function updateLocalLocations(rad, options) {
     service.nearbySearch(request, success);
 }
 
+function success(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        return results;
+    }
+    else {
+        console.log(status);
+    }
+}
+
+
 //this is good for now, can adjust for latitude and longitude queries later as api handles them
 function getWeather(city, numberOfDays) {
     var xml = new XMLHttpRequest();
