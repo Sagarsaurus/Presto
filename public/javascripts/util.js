@@ -129,14 +129,27 @@ function updateNews(city, newsType) {
 }
 
 var foodHtml;
-function updateFood(city) {
+function updateFood(city, lat, long) {
+    console.log(lat);
+    console.log(long);
+    var nameValuePairs = "";
+    if(lat != null && long != null) {
+        nameValuePairs = 'city='+city+'&coordinates='+lat+',='+long;
+    }
+    else {
+        nameValuePairs = 'city='+city;
+
+    }
+
+    console.log(nameValuePairs);
+
     var xml = new XMLHttpRequest();
-    var nameValuePairs = 'city='+city;
     xml.open("POST", "api/getFood", false); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send(nameValuePairs);
 
     var response = JSON.parse(xml.responseText);
+    console.log(response);
     var food = document.getElementById('food');
     document.getElementById('infoDiv').style.visibility="visible";
     var toSet = "<div class='container'>";
@@ -229,11 +242,12 @@ function getWeather(city, numberOfDays) {
 //janky fix
 function updateInformation(city) {
     updateNews(city, 'rt_US');
-    updateFood(city);
+    updateFood(city, null, null);
 }
 
 function updateBasedOnLocation() {
+    console.log(this.latitude);
+    console.log(this.longitude);
     updateNews(this.city, 'rt_US');
-    updateFood(this.city);
+    updateFood(this.city, this.latitude, this.longitude);
 }
-

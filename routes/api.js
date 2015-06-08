@@ -56,15 +56,30 @@ var api = {
             token_secret: "vR1eqDCCYrG7LEOZQygl_NMHmWY"
         });
 
+
+        if(req.body.coordinates.length > 0) {
+            yelp.search({term: "food", location: req.body.city, cll: req.body.coordinates, sort: 2}, function(err, data) {
+                if(err) {
+                    response.status(500).send({error: err});
+                }
+                else {
+                    response.status(200).send({message: data});
+                }
+            });
+        }
+
+        else {
+            yelp.search({term: "food", location: req.body.city, sort: 2}, function(err, data) {
+                if(err) {
+                    response.status(500).send({error: err});
+                }
+                else {
+                    response.status(200).send({message: data});
+                }
+            });
+        }
         // See http://www.yelp.com/developers/documentation/v2/search_api
-        yelp.search({term: "food", location: req.body.city, sort: 2}, function(err, data) {
-            if(err) {
-                response.status(500).send({error: err});
-            }
-            else {
-                response.status(200).send({message: data});
-            }
-        });
+
     },
 
     getEvents: function(req, response) {
