@@ -1,0 +1,22 @@
+extends layout
+
+block content
+	div.ui.one.column.center.aligned.grid
+		div.column.six.wide.form-holder
+			h2.center.aligned.header.form-head User Login
+			div.ui.form.segment
+				div.field
+					label Username
+					input(type="text" placeholder="Username")
+				div.field
+					label Password
+					input(type="password" placeholder="Password")
+				div.field
+					input.ui.button.large.fluid.green(type="submit" value="Login")
+				div.inline.field
+					div.ui.checkbox
+						input(type="checkbox" name="terms")
+						label I agree to the terms and conditions
+					div.ui.checkbox
+						input(type="checkbox" name="remember")
+						label Remember me
