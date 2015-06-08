@@ -2,8 +2,16 @@
  * Created by sagarsaurus on 5/26/15.
  */
 var searchOptions = ['accounting', 'airport', 'amusement_park', 'aquarium', 'art_gallery', 'atm', 'bakery','bank', 'bar', 'beauty_salon', 'bicycle_store', 'book_store', 'bowling_alley', 'bus_station', 'cafe', 'campground', 'car_dealer', 'car_rental', 'car_repair', 'car_wash', 'casino', 'cemetary', 'church', 'city_hall', 'clothing_store', 'convenience_store', 'courthouse', 'dentist', 'department_store', 'doctor', 'electrician', 'electronics_store', 'embassy', 'establishment', 'finance', 'fire_station', 'florist', 'food', 'funeral_home', 'furniture_store', 'gas_station', 'general_contractor', 'grocery_or_supermarket', 'gym', 'hair_care', 'hardware_store', 'health', 'hindu_temple', 'home_goods_store', 'hospital', 'insurance_agency', 'jewelry_store', 'laundry', 'lawyer', 'library', 'liquor_store', 'local_government_office', 'locksmith', 'lodging', 'meal_delivery', 'meal_takeaway', 'mosque', 'movie_rental', 'movie_theater', 'moving_company', 'museum', 'night_club', 'painter', 'park', 'parking', 'pet_store', 'pharmacy', 'physiotherapist', 'place_of_worship', 'plumber', 'police', 'post_office', 'real_estate_agency', 'restaurant', 'roofing_contractor', 'rv_park', 'school', 'shoe_store', 'shopping_mall', 'spa', 'stadium', 'storage', 'store', 'subway_station', 'synagogue', 'taxi_stand', 'train_station', 'travel_agency', 'university', 'veterinary_care', 'zoo'];
+var latitude="";
+var longitude="";
+var city="";
+var state="";
+var country="";
+var geocoder;
 function getLocation() {
+
     if (navigator.geolocation) {
+        geocoder = geocoder = new google.maps.Geocoder();
         navigator.geolocation.getCurrentPosition(showPosition, handle_errors);
     }   else {
         alert("Geolocation is not supported by this browser.");
@@ -11,8 +19,23 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
+    this.latitude = position.coords.latitude;
+    this.longitude = position.coords.longitude;
+    var latlng = new google.maps.LatLng(parseFloat(this.latitude), parseFloat(this.longitude));
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+                //formatted address
+                this.city=results[0].address_components[2].long_name;
+                this.state=results[0].address_components[5].long_name;
+                this.country=results[0].address_components[6].long_name;
+            } else {
+                alert("No results found");
+            }
+        } else {
+            alert("Geocoder failed due to: " + status);
+        }
+    });
     // console.log(latitude);
     // console.log(longitude);
     // alert("Latitude is: "+latitude+"\nand Longitude is: "+longitude);;
@@ -198,3 +221,9 @@ function updateInformation(city) {
     updateNews(city, 'rt_US');
     updateFood(city);
 }
+
+function updateBasedOnLocation() {
+    updateNews(this.city, 'rt_US');
+    updateFood(this.city);
+}
+
