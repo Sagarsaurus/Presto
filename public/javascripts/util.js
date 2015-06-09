@@ -146,7 +146,6 @@ function updateFood(city, lat, long) {
     xml.send(nameValuePairs);
 
     var response = JSON.parse(xml.responseText);
-    console.log(response);
     var food = document.getElementById('food');
     document.getElementById('infoDiv').style.visibility="visible";
     var toSet = "<div class='container'>";
@@ -199,7 +198,6 @@ function updateEvents(city, lat, long) {
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send();
     var response = JSON.parse(xml.responseText);
-    console.log(response);
     return response;
 }
 
