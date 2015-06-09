@@ -10,6 +10,7 @@ var eventful = require('eventful-node');
 var client = new eventful.Client('r9GWjC5WKhRRZwfC');
 var geolib = require('geolib');
 var GooglePlaces = require('google-places');
+var eventbriteAPI = require('node-eventbrite');
 
 mongoose.model("Deal", {description : String, industry : String, affiliated_with : String, city: String, posted_by: String, latitude: Number, longitude: Number, valid_until: Date });
 
@@ -82,39 +83,6 @@ var api = {
 
     },
 
-    getEvents: function(req, response) {
-        if(req.body.city.length==0 || req.body.typeOfEvent.length==0) {
-            response.status(500).send({error: "Please make sure to provide all API parameters"});
-
-        }
-
-        client.searchEvents({ keywords: req.body.city+'   '+req.body.typeOfEvent }, function(err, data){
-
-            if(err){
-
-                response.status(500).send({error: err});
-
-            }
-
-            //console.log('Recieved ' + data.search.total_items + ' events');
-            //
-            //console.log('Event listings: ');
-            //
-            ////print the title of each event
-            //for(var i in data.search.events){
-            //
-            //    console.log(data.search.events[i].title);
-            //
-            //}
-            else {
-
-                response.status(200).send({message: data});
-
-            }
-
-        });
-    },
-
     addDeal: function(req, response) {
         //need to add support to make sure duplicate does not exist
         //perhaps add upvote system for deals so best ones are towards top?
@@ -169,7 +137,6 @@ var api = {
 
 router.post('/getNews', api.getNews);
 router.post('/getFood', api.getFood);
-router.post('/getEvents', api.getEvents);
 router.post('/addDeal', api.addDeal);
 router.post('/getDeals', api.getDeals);
 

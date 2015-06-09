@@ -185,14 +185,21 @@ function updateFood(city, lat, long) {
     foodHtml = toSet;
 }
 
-function updateEvents(city, typeOfEvent) {
+function updateEvents(city, lat, long) {
     var xml = new XMLHttpRequest();
-    var nameValuePairs = 'city='+city+'&typeOfEvent='+typeOfEvent;
-    xml.open("POST", "api/getEvents", false); //AJAX Set request
+    var apiString = 'https://www.eventbriteapi.com/v3/events/search/?';
+    if(lat != null && long != null) {
+        apiString += 'location.latitude='+lat+'&location.longitude='+long;
+    }
+    else {
+        apiString += 'venue.city='+city;
+    }
+    apiString+='&token=XEBSWYRXEZJHDUP3TIAN';
+    xml.open("GET", apiString, false); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xml.send(nameValuePairs);
-
+    xml.send();
     var response = JSON.parse(xml.responseText);
+    console.log(response);
     return response;
 }
 
@@ -240,11 +247,11 @@ function getWeather(city, numberOfDays) {
 function updateInformation(city) {
     updateNews(city, 'rt_US');
     updateFood(city, null, null);
+    updateEvents(city, null, null);
 }
 
 function updateBasedOnLocation() {
-    console.log(this.latitude);
-    console.log(this.longitude);
     updateNews(this.city, 'rt_US');
     updateFood(this.city, this.latitude, this.longitude);
+    updateEvents(this.city, this.latitude, this.longitude);
 }
