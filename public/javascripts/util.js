@@ -149,7 +149,7 @@ function updateFood(city, lat, long) {
     var food = document.getElementById('food');
     document.getElementById('infoDiv').style.visibility="visible";
     var toSet = "<div class='container'>";
-    toSet += '<div class="ui large red label" id="messageHeader">Local Dining <span><i class="food icon"></i></span></div> ';
+    toSet += '<div class="ui large blue label" id="messageHeader">Local Dining <span><i class="food icon"></i></span><br/><h6>Powered by Yelp <span><i class="yelp icon"></i></span></h6></div> ';
     toSet += "<br/><br/>";
     var responseList = response['message']['businesses'];
     for(var i = 0; i < responseList.length; i++) {
