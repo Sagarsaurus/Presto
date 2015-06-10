@@ -194,7 +194,7 @@ function updateEvents(city, lat, long, radius) {
     else {
         apiString += 'venue.city='+city+'&sort_by=date';
     }
-    apiString+='&token=XEBSWYRXEZJHDUP3TIAN';
+    apiString+='&token=JJQXYFFDBPDNMWYPV6TZ';
     xml.open("GET", apiString, false); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send();
