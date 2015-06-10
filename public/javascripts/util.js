@@ -223,7 +223,7 @@ function updateEvents(city, lat, long, radius) {
     toSet += '<div class="ui large orange label" id="messageHeader">Local Events <span><i class="ticket icon"></i></span></div> ';
     toSet += "<br/><br/>";
 
-
+    //console.log(restructure);
     for(var j = 0; j < index; j++) {
         var item = restructure[indexArray[j]];
 
@@ -232,13 +232,17 @@ function updateEvents(city, lat, long, radius) {
         '<div class="content"> ' +
             //'<div class="ui grid">'+
             //    "<div class='column'>"+
-        '<a class="header" href="'+item[0]['url']+'">'+item[0]['name'].text+'</a> ' +
+        '<div class="ui massive blue label">'+item[0]['name'].text+'</div><div class="ui bulleted list">';
+        for(var k=0; k < item.length; k++) {
+            toSet+='<a class="item" href="'+item[k].url+'">'+item[k]["start"].local.slice(0, 10)+'</a>';
+
+        }
             //    "</div>"+
             //    "<div class='column'>"+
             //        "<span></span>"+
             //    "</div>"+
             //"</div>"+
-        '</div> ' +
+        toSet+='</div></div> ' +
         '</div><hr>';
         //var $element =$('<div class="item"> ' +
         //    '<div class="content"> ' +
