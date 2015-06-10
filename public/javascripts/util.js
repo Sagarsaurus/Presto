@@ -232,9 +232,9 @@ function updateEvents(city, lat, long, radius) {
         '<div class="content"> ' +
             //'<div class="ui grid">'+
             //    "<div class='column'>"+
-        '<div class="ui massive blue label">'+item[0]['name'].text+'</div><div class="ui bulleted list">';
+        '<div class="ui massive blue label">'+item[0]['name'].text+'</div><br/><br/><div class="ui compact menu"><div class="ui simple dropdown item">Dates: <i class="dropdown icon"></i><div class="menu">';
         for(var k=0; k < item.length; k++) {
-            toSet+='<a class="item" href="'+item[k].url+'">'+item[k]["start"].local.slice(0, 10)+'</a>';
+            toSet+='<div class="item"><a href="'+item[k].url+'">'+item[k]["start"].local.slice(0, 10)+'</a></div>';
 
         }
             //    "</div>"+
@@ -242,7 +242,7 @@ function updateEvents(city, lat, long, radius) {
             //        "<span></span>"+
             //    "</div>"+
             //"</div>"+
-        toSet+='</div></div> ' +
+        toSet+='</div></div></div></div>' +
         '</div><hr>';
         //var $element =$('<div class="item"> ' +
         //    '<div class="content"> ' +
