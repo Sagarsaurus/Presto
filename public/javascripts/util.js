@@ -200,19 +200,39 @@ function updateEvents(city, lat, long, radius) {
     xml.send();
     var response = JSON.parse(xml.responseText);
     //uncomment this next line to see the contents of the JSON to add future functionality.
-    console.log(response);
+    //console.log(response);
+    var restructure = [];
+    var index = 0;
+    var indexArray = [];
+    //the following code restructures the data so that we remove duplicate items on the event list.
+    //now we simply need to iterate through the restructured array, indexing using the string from the indexArray to get a list of elements with the same names
+    //finally, we just have to list all future dates with some more iteration, but that hasn't been implemented yet.
+    for(var i = 0; i < response['events'].length; i++) {
+        item = response['events'][i];
+        if(restructure[item['name'].text]==null) {
+            restructure[item['name'].text]=[];
+            indexArray[index] = item['name'].text;
+            index+=1;
+        }
+
+        restructure[item['name'].text].push(item);
+
+    }
+
     var toSet = "<div class='container'>";
     toSet += '<div class="ui large orange label" id="messageHeader">Local Events <span><i class="ticket icon"></i></span></div> ';
     toSet += "<br/><br/>";
-    for(var i = 0; i < response['events'].length; i++) {
-        item = response['events'][i];
+
+
+    for(var j = 0; j < index; j++) {
+        var item = restructure[indexArray[j]];
 
         // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
         toSet+='<div class="item"> ' +
         '<div class="content"> ' +
             //'<div class="ui grid">'+
             //    "<div class='column'>"+
-        '<a class="header" href="'+item['url']+'">'+item['name'].text+'</a> ' +
+        '<a class="header" href="'+item[0]['url']+'">'+item[0]['name'].text+'</a> ' +
             //    "</div>"+
             //    "<div class='column'>"+
             //        "<span></span>"+
@@ -249,7 +269,6 @@ function updateEvents(city, lat, long, radius) {
     }
     toSet+='</div>';
     eventHtml = toSet;
-    //return response;
 }
 
 //function which gathers information about several different local elements, look at list at top to see potential options
