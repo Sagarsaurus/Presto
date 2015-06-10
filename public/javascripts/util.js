@@ -184,21 +184,72 @@ function updateFood(city, lat, long) {
     foodHtml = toSet;
 }
 
+var eventHtml;
 function updateEvents(city, lat, long, radius) {
     var xml = new XMLHttpRequest();
     var apiString = 'https://www.eventbriteapi.com/v3/events/search/?';
     if(lat != null && long != null && radius != null) {
-        apiString += 'location.latitude='+lat+'&location.longitude='+long+'&location.within='+radius+'mi';
+        apiString += 'location.latitude='+lat+'&location.longitude='+long+'&location.within='+radius+'mi&sort_by=date';
     }
     else {
-        apiString += 'venue.city='+city;
+        apiString += 'venue.city='+city+'&sort_by=date';
     }
     apiString+='&token=XEBSWYRXEZJHDUP3TIAN';
     xml.open("GET", apiString, false); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send();
     var response = JSON.parse(xml.responseText);
-    return response;
+    //uncomment this next line to see the contents of the JSON to add future functionality.
+    console.log(response);
+    var toSet = "<div class='container'>";
+    toSet += '<div class="ui large orange label" id="messageHeader">Local Events <span><i class="ticket icon"></i></span></div> ';
+    toSet += "<br/><br/>";
+    for(var i = 0; i < response['events'].length; i++) {
+        item = response['events'][i];
+
+        // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
+        toSet+='<div class="item"> ' +
+        '<div class="content"> ' +
+            //'<div class="ui grid">'+
+            //    "<div class='column'>"+
+        '<a class="header" href="'+item['url']+'">'+item['name'].text+'</a> ' +
+            //    "</div>"+
+            //    "<div class='column'>"+
+            //        "<span></span>"+
+            //    "</div>"+
+            //"</div>"+
+        '</div> ' +
+        '</div><hr>';
+        //var $element =$('<div class="item"> ' +
+        //    '<div class="content"> ' +
+        //        //'<div class="ui grid">'+
+        //        //    "<div class='column'>"+
+        //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+        //        //    "</div>"+
+        //        //    "<div class='column'>"+
+        //        //        "<span></span>"+
+        //        //    "</div>"+
+        //        //"</div>"+
+        //    '</div> ' +
+        //    '</div><hr>');
+        //var itemElement ='<div class="item"> ' +
+        //    '<div class="content"> ' +
+        //        //'<div class="ui grid">'+
+        //        //    "<div class='column'>"+
+        //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+        //        //    "</div>"+
+        //        //    "<div class='column'>"+
+        //        //        "<span></span>"+
+        //        //    "</div>"+
+        //        //"</div>"+
+        //    '</div> ' +
+        //    '</div><hr>';
+        //itemLists.push(itemElement);
+        //listView.append($element);
+    }
+    toSet+='</div>';
+    eventHtml = toSet;
+    //return response;
 }
 
 //function which gathers information about several different local elements, look at list at top to see potential options
@@ -247,13 +298,13 @@ function getWeather(city, numberOfDays) {
 function updateInformation(city) {
     updateNews(city, 'rt_US');
     updateFood(city, null, null);
-    //updateEvents(city, null, null, null);
+    updateEvents(city, null, null, null);
     //updateLocalLocations()
 }
 
 function updateBasedOnLocation() {
     updateNews(this.city, 'rt_US');
     updateFood(this.city, this.latitude, this.longitude);
-    //updateEvents(this.city, this.latitude, this.longitude, 10);
+    updateEvents(this.city, this.latitude, this.longitude, 10);
     //updateLocalLocations(10, ['church']);
 }
