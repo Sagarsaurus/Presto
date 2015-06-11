@@ -19,16 +19,17 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    this.latitude = position.coords.latitude;
-    this.longitude = position.coords.longitude;
-    var latlng = new google.maps.LatLng(parseFloat(this.latitude), parseFloat(this.longitude));
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    var latlng = new google.maps.LatLng(parseFloat(latitude), parseFloat(longitude));
     geocoder.geocode({'latLng': latlng}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             if (results[0]) {
                 //formatted address
-                this.city=results[0].address_components[2].long_name;
-                this.state=results[0].address_components[5].long_name;
-                this.country=results[0].address_components[6].long_name;
+                var city=results[0].address_components[2].long_name;
+                var state=results[0].address_components[5].long_name;
+                var country=results[0].address_components[6].long_name;
+                updateBasedOnLocation(city, latitude, longitude);
             } else {
                 alert("No results found");
             }
@@ -278,7 +279,7 @@ function updateEvents(city, lat, long, radius) {
 //function which gathers information about several different local elements, look at list at top to see potential options
 //pass in options as a list: for example, ['food', 'church'], etc
 //enter radius in miles, i'll handle the rest
-function updateLocalLocations(rad, options) {
+function updateLocalLocations(lat, long, rad, options) {
     var center = new google.maps.LatLng(parseFloat(this.latitude), parseFloat(this.longitude));
     var map = new google.maps.Map(document.getElementById('map'), {
         center: center,
@@ -325,9 +326,9 @@ function updateInformation(city) {
     //updateLocalLocations()
 }
 
-function updateBasedOnLocation() {
-    updateNews(this.city, 'rt_US');
-    updateFood(this.city, this.latitude, this.longitude);
-    updateEvents(this.city, this.latitude, this.longitude, 10);
-    //updateLocalLocations(10, ['church']);
+function updateBasedOnLocation(city, lat, long) {
+    updateNews(city, 'rt_US');
+    updateFood(city, lat, long);
+    updateEvents(city, lat, long, 10);
+    //updateLocalLocations(lat, long, 10, ['church']);
 }
