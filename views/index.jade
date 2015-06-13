@@ -28,14 +28,11 @@ block content
         $(".shape")
             .shape('set next side', '#foodContent')
             .shape('flip right');
-            $("#foodContentLocation").html(foodHtml)
         });
         $('#news').click( function(){
             $('.shape')
             .shape('set next side', '#newsContent')
             .shape('flip right');
-            $("#newsContentLocation")
-            .html(newsStuff)
             //$("#newsContent").jscroll({
               //  autoTriggerUntil: 10, contentSelector: '.item'
             //})
@@ -44,6 +41,4 @@ block content
             $('.shape')
             .shape('set next side', '#eventContent')
             .shape('flip right');
-            $("#eventContentLocation")
-            .html(eventHtml);
         });

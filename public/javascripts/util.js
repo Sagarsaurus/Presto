@@ -59,10 +59,10 @@ function handle_errors(error)
             break;
     }
 }
-var newsStuff = "";
 var listView;
 //update this to take in news type in the future, remove call in showPosition once sunny finishes dropdown
 function updateNews(city, newsType) {
+    document.getElementById('newsContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading News</div>';
     var xml = new XMLHttpRequest();
     var nameValuePairs = 'city='+city+'&newsType='+newsType;
     var response;
@@ -125,7 +125,7 @@ function updateNews(city, newsType) {
             }
             toSet+='</div>';
             //console.log(listView);
-            newsStuff = toSet;
+            document.getElementById('newsContentLocation').innerHTML = toSet;
         }
     };
 
@@ -135,8 +135,8 @@ function updateNews(city, newsType) {
 }
 
 //add support soon to allow them to order results by either distance or highest rating.  Filtering by cuisine should be done on the front end itself.
-var foodHtml;
 function updateFood(city, lat, long) {
+    document.getElementById('foodContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Food Offerings</div>';
     var nameValuePairs = "";
     if(lat != null && long != null) {
         nameValuePairs = 'city='+city+'&coordinates='+lat+','+long;
@@ -186,7 +186,7 @@ function updateFood(city, lat, long) {
             }
 
             toSet+='</div>';
-            foodHtml = toSet;
+            document.getElementById('foodContentLocation').innerHTML = toSet;
         }
     };
 
@@ -195,8 +195,8 @@ function updateFood(city, lat, long) {
     xml.send(nameValuePairs);
 }
 
-var eventHtml;
 function updateEvents(city, lat, long, radius) {
+    document.getElementById('eventContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Event Offerings</div>';
     var xml = new XMLHttpRequest();
     var apiString = 'https://www.eventbriteapi.com/v3/events/search/?';
     if(lat != null && long != null && radius != null) {
@@ -283,7 +283,7 @@ function updateEvents(city, lat, long, radius) {
                 //listView.append($element);
             }
             toSet+='</div>';
-            eventHtml = toSet;
+            document.getElementById('eventContentLocation').innerHTML = toSet;
         }
     };
     xml.open("GET", apiString, true); //AJAX Set request
