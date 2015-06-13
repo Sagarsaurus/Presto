@@ -318,6 +318,21 @@ function getWeather(city, numberOfDays) {
     return response;
 }
 
+function getHousing(lat, long, radiusInMiles) {
+    var xml = new XMLHttpRequest();
+    //currently the distance is hardcoded but it must be changed in the future to whatever the user wants
+    var apiString = 'https://zilyo.p.mashape.com/search?latitude='+lat+'&longitude='+long+"&maxdistance="+(parseFloat(radiusInMiles)/1.60);
+    xml.onreadystatechange=function() {
+        if (xml.readyState==4 && xml.status==200) {
+            console.log(JSON.parse(xml.responseText));
+        }
+    };
+    xml.open("GET", apiString, true); //AJAX Set request
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.setRequestHeader("X-Mashape-Key", "HxCVmkeS4ymshwsxKwjHxbk7U3wap1SO9SqjsnuxNUD4DMYMv0");
+    xml.send();
+}
+
 //janky fix
 function updateInformation(city) {
     updateNews(city, 'rt_US');
