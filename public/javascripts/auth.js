@@ -1,4 +1,4 @@
-jquery(document).ready(function () {
+$(document).ready(function () {
    /*
     Background slide show
      */
