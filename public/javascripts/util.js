@@ -63,70 +63,75 @@ var newsStuff = "";
 var listView;
 //update this to take in news type in the future, remove call in showPosition once sunny finishes dropdown
 function updateNews(city, newsType) {
-    var xmlhttp = new XMLHttpRequest();
+    var xml = new XMLHttpRequest();
     var nameValuePairs = 'city='+city+'&newsType='+newsType;
-    xmlhttp.open("POST", "api/getNews", false); //AJAX Set request
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send(nameValuePairs);
+    var response;
+    xml.onreadystatechange=function() {
+        if (xml.readyState==4 && xml.status==200) {
+            response = JSON.parse(xml.responseText);
+            document.getElementById('infoDiv').style.visibility="visible";
+            var toSet = "<div class='container'>";
+            toSet += '<div class="ui large green label" id="messageHeader">Local News <span><i class="newspaper icon"></i></span></div> ';
+            toSet += "<br/><br/>";
+            var responseList = response['message']['d']['results'];
+            //var tempString = <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div>
+            var $el = $('#newsContentLocation');
+            listView = new infinity.ListView($el);
+            var item;
+            var itemLists = [];
 
-    var response = JSON.parse(xmlhttp.responseText);
-    document.getElementById('infoDiv').style.visibility="visible";
-    var toSet = "<div class='container'>";
-    toSet += '<div class="ui large green label" id="messageHeader">Local News <span><i class="newspaper icon"></i></span></div> ';
-    toSet += "<br/><br/>";
-    var responseList = response['message']['d']['results'];
-    //var tempString = <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div>
-    var $el = $('#newsContentLocation');
-    listView = new infinity.ListView($el);
-    var item;
-    var itemLists = [];
+            for(var i = 0; i < responseList.length; i++) {
+                item = response['message']['d']['results'][i];
 
-    for(var i = 0; i < responseList.length; i++) {
-        item = response['message']['d']['results'][i];
+                // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
+                toSet+='<div class="item"> ' +
+                '<div class="content"> ' +
+                    //'<div class="ui grid">'+
+                    //    "<div class='column'>"+
+                '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                    //    "</div>"+
+                    //    "<div class='column'>"+
+                    //        "<span></span>"+
+                    //    "</div>"+
+                    //"</div>"+
+                '</div> ' +
+                '</div><hr>';
+                //var $element =$('<div class="item"> ' +
+                //    '<div class="content"> ' +
+                //        //'<div class="ui grid">'+
+                //        //    "<div class='column'>"+
+                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //        //    "</div>"+
+                //        //    "<div class='column'>"+
+                //        //        "<span></span>"+
+                //        //    "</div>"+
+                //        //"</div>"+
+                //    '</div> ' +
+                //    '</div><hr>');
+                //var itemElement ='<div class="item"> ' +
+                //    '<div class="content"> ' +
+                //        //'<div class="ui grid">'+
+                //        //    "<div class='column'>"+
+                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //        //    "</div>"+
+                //        //    "<div class='column'>"+
+                //        //        "<span></span>"+
+                //        //    "</div>"+
+                //        //"</div>"+
+                //    '</div> ' +
+                //    '</div><hr>';
+                //itemLists.push(itemElement);
+                //listView.append($element);
+            }
+            toSet+='</div>';
+            //console.log(listView);
+            newsStuff = toSet;
+        }
+    };
 
-        // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
-        toSet+='<div class="item"> ' +
-            '<div class="content"> ' +
-                //'<div class="ui grid">'+
-                //    "<div class='column'>"+
-            '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
-                //    "</div>"+
-                //    "<div class='column'>"+
-                //        "<span></span>"+
-                //    "</div>"+
-                //"</div>"+
-            '</div> ' +
-            '</div><hr>';
-        //var $element =$('<div class="item"> ' +
-        //    '<div class="content"> ' +
-        //        //'<div class="ui grid">'+
-        //        //    "<div class='column'>"+
-        //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
-        //        //    "</div>"+
-        //        //    "<div class='column'>"+
-        //        //        "<span></span>"+
-        //        //    "</div>"+
-        //        //"</div>"+
-        //    '</div> ' +
-        //    '</div><hr>');
-        //var itemElement ='<div class="item"> ' +
-        //    '<div class="content"> ' +
-        //        //'<div class="ui grid">'+
-        //        //    "<div class='column'>"+
-        //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
-        //        //    "</div>"+
-        //        //    "<div class='column'>"+
-        //        //        "<span></span>"+
-        //        //    "</div>"+
-        //        //"</div>"+
-        //    '</div> ' +
-        //    '</div><hr>';
-        //itemLists.push(itemElement);
-        //listView.append($element);
-    }
-    toSet+='</div>';
-    //console.log(listView);
-    newsStuff = toSet;
+    xml.open("POST", "api/getNews", true); //AJAX Set request
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.send(nameValuePairs);
 }
 
 //add support soon to allow them to order results by either distance or highest rating.  Filtering by cuisine should be done on the front end itself.
@@ -140,49 +145,54 @@ function updateFood(city, lat, long) {
         nameValuePairs = 'city='+city;
     }
 
-
     var xml = new XMLHttpRequest();
-    xml.open("POST", "api/getFood", false); //AJAX Set request
+    var response;
+    xml.onreadystatechange=function() {
+        if (xml.readyState==4 && xml.status==200) {
+            response = JSON.parse(xml.responseText);
+
+            var food = document.getElementById('food');
+            document.getElementById('infoDiv').style.visibility="visible";
+            var toSet = "<div class='container'>";
+            toSet += '<div class="ui large blue label" id="messageHeader">Local Dining <span><i class="food icon"></i></span><br/><h6>Powered by Yelp <span><i class="red yelp icon"></i></span></h6></div> ';
+            toSet += "<br/><br/>";
+            var responseList = response['message']['businesses'];
+            for(var i = 0; i < responseList.length; i++) {
+                var item = responseList[i];
+                toSet+='<div class="item"> ' +
+                '<div class="content"> <div class="ui grid" style="width:100%; text-align: center;"> <div class="column" style="font-size: large; width: 50%;">' +
+                    //'<div class="ui grid">'+
+                    //    "<div class='column'>"+
+                '<a class="header" href="'+item['url']+'">'+item['name']+'</a> ' +
+                    //    "</div>"+
+                    //    "<div class='column'>"+
+                    //        "<span></span>"+
+                    //    "</div>"+
+                    //"</div>"+
+                '</div> ';
+                //for(var j = 0; j < item['categories'].length; j++) {
+                //    toSet+='<div class="item"> <i class="right triangle icon"></i>   <div class="content"> <div class="description">'+item['categories'][j][0]+'</div> </div> </div>';
+                //}
+                toSet+='<div class="column" style="font-style: italic; font-size: large; width: 50%;"><div class="content">';
+                var parsedInt = parseInt(item['rating']);
+                //console.log(parsedInt);
+                for(var x = 0; x < parsedInt; x++) {
+                    toSet+= '<i class="star icon" style="color: red"></i>';
+                }
+                for(var y = 0; y < 5-parsedInt; y++) {
+                    toSet += '<i class="star icon" style="color:black"></i>';
+                }
+                toSet += '</div></div></div></div></div><hr>';
+            }
+
+            toSet+='</div>';
+            foodHtml = toSet;
+        }
+    };
+
+    xml.open("POST", "api/getFood", true); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send(nameValuePairs);
-
-    var response = JSON.parse(xml.responseText);
-    var food = document.getElementById('food');
-    document.getElementById('infoDiv').style.visibility="visible";
-    var toSet = "<div class='container'>";
-    toSet += '<div class="ui large blue label" id="messageHeader">Local Dining <span><i class="food icon"></i></span><br/><h6>Powered by Yelp <span><i class="red yelp icon"></i></span></h6></div> ';
-    toSet += "<br/><br/>";
-    var responseList = response['message']['businesses'];
-    for(var i = 0; i < responseList.length; i++) {
-        var item = responseList[i];
-        toSet+='<div class="item"> ' +
-            '<div class="content"> <div class="ui grid" style="width:100%; text-align: center;"> <div class="column" style="font-size: large; width: 50%;">' +
-                //'<div class="ui grid">'+
-                //    "<div class='column'>"+
-            '<a class="header" href="'+item['url']+'">'+item['name']+'</a> ' +
-                //    "</div>"+
-                //    "<div class='column'>"+
-                //        "<span></span>"+
-                //    "</div>"+
-                //"</div>"+
-            '</div> ';
-        //for(var j = 0; j < item['categories'].length; j++) {
-        //    toSet+='<div class="item"> <i class="right triangle icon"></i>   <div class="content"> <div class="description">'+item['categories'][j][0]+'</div> </div> </div>';
-        //}
-        toSet+='<div class="column" style="font-style: italic; font-size: large; width: 50%;"><div class="content">';
-        var parsedInt = parseInt(item['rating']);
-        //console.log(parsedInt);
-        for(var x = 0; x < parsedInt; x++) {
-            toSet+= '<i class="star icon" style="color: red"></i>';
-        }
-        for(var y = 0; y < 5-parsedInt; y++) {
-            toSet += '<i class="star icon" style="color:black"></i>';
-        }
-        toSet += '</div></div></div></div></div><hr>';
-    }
-
-    toSet+='</div>';
-    foodHtml = toSet;
 }
 
 var eventHtml;
@@ -196,84 +206,89 @@ function updateEvents(city, lat, long, radius) {
         apiString += 'venue.city='+city+'&sort_by=date';
     }
     apiString+='&token=JJQXYFFDBPDNMWYPV6TZ';
-    xml.open("GET", apiString, false); //AJAX Set request
+    var response;
+    xml.onreadystatechange=function() {
+        if (xml.readyState==4 && xml.status==200) {
+            response = JSON.parse(xml.responseText);
+            //uncomment this next line to see the contents of the JSON to add future functionality.
+            //console.log(response);
+            var restructure = [];
+            var index = 0;
+            var indexArray = [];
+            //the following code restructures the data so that we remove duplicate items on the event list.
+            //now we simply need to iterate through the restructured array, indexing using the string from the indexArray to get a list of elements with the same names
+            //finally, we just have to list all future dates with some more iteration, but that hasn't been implemented yet.
+            for(var i = 0; i < response['events'].length; i++) {
+                item = response['events'][i];
+                if(restructure[item['name'].text]==null) {
+                    restructure[item['name'].text]=[];
+                    indexArray[index] = item['name'].text;
+                    index+=1;
+                }
+
+                restructure[item['name'].text].push(item);
+
+            }
+
+            var toSet = "<div class='container'>";
+            toSet += '<div class="ui large orange label" id="messageHeader">Local Events <span><i class="ticket icon"></i></span></div> ';
+            toSet += "<br/><br/>";
+
+            //console.log(restructure);
+            for(var j = 0; j < index; j++) {
+                var item = restructure[indexArray[j]];
+
+                // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
+                toSet+='<div class="item"> ' +
+                '<div class="content"> ' +
+                    //'<div class="ui grid">'+
+                    //    "<div class='column'>"+
+                '<div class="ui massive blue label">'+item[0]['name'].text+'</div><br/><br/><div class="ui compact menu"><div class="ui simple dropdown item">Dates: <i class="dropdown icon"></i><div class="menu">';
+                for(var k=0; k < item.length; k++) {
+                    toSet+='<div class="item"><a href="'+item[k].url+'">'+item[k]["start"].local.slice(0, 10)+'</a></div>';
+
+                }
+                //    "</div>"+
+                //    "<div class='column'>"+
+                //        "<span></span>"+
+                //    "</div>"+
+                //"</div>"+
+                toSet+='</div></div></div></div>' +
+                '</div><hr>';
+                //var $element =$('<div class="item"> ' +
+                //    '<div class="content"> ' +
+                //        //'<div class="ui grid">'+
+                //        //    "<div class='column'>"+
+                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //        //    "</div>"+
+                //        //    "<div class='column'>"+
+                //        //        "<span></span>"+
+                //        //    "</div>"+
+                //        //"</div>"+
+                //    '</div> ' +
+                //    '</div><hr>');
+                //var itemElement ='<div class="item"> ' +
+                //    '<div class="content"> ' +
+                //        //'<div class="ui grid">'+
+                //        //    "<div class='column'>"+
+                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //        //    "</div>"+
+                //        //    "<div class='column'>"+
+                //        //        "<span></span>"+
+                //        //    "</div>"+
+                //        //"</div>"+
+                //    '</div> ' +
+                //    '</div><hr>';
+                //itemLists.push(itemElement);
+                //listView.append($element);
+            }
+            toSet+='</div>';
+            eventHtml = toSet;
+        }
+    };
+    xml.open("GET", apiString, true); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send();
-    var response = JSON.parse(xml.responseText);
-    //uncomment this next line to see the contents of the JSON to add future functionality.
-    //console.log(response);
-    var restructure = [];
-    var index = 0;
-    var indexArray = [];
-    //the following code restructures the data so that we remove duplicate items on the event list.
-    //now we simply need to iterate through the restructured array, indexing using the string from the indexArray to get a list of elements with the same names
-    //finally, we just have to list all future dates with some more iteration, but that hasn't been implemented yet.
-    for(var i = 0; i < response['events'].length; i++) {
-        item = response['events'][i];
-        if(restructure[item['name'].text]==null) {
-            restructure[item['name'].text]=[];
-            indexArray[index] = item['name'].text;
-            index+=1;
-        }
-
-        restructure[item['name'].text].push(item);
-
-    }
-
-    var toSet = "<div class='container'>";
-    toSet += '<div class="ui large orange label" id="messageHeader">Local Events <span><i class="ticket icon"></i></span></div> ';
-    toSet += "<br/><br/>";
-
-    //console.log(restructure);
-    for(var j = 0; j < index; j++) {
-        var item = restructure[indexArray[j]];
-
-        // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
-        toSet+='<div class="item"> ' +
-        '<div class="content"> ' +
-            //'<div class="ui grid">'+
-            //    "<div class='column'>"+
-        '<div class="ui massive blue label">'+item[0]['name'].text+'</div><br/><br/><div class="ui compact menu"><div class="ui simple dropdown item">Dates: <i class="dropdown icon"></i><div class="menu">';
-        for(var k=0; k < item.length; k++) {
-            toSet+='<div class="item"><a href="'+item[k].url+'">'+item[k]["start"].local.slice(0, 10)+'</a></div>';
-
-        }
-            //    "</div>"+
-            //    "<div class='column'>"+
-            //        "<span></span>"+
-            //    "</div>"+
-            //"</div>"+
-        toSet+='</div></div></div></div>' +
-        '</div><hr>';
-        //var $element =$('<div class="item"> ' +
-        //    '<div class="content"> ' +
-        //        //'<div class="ui grid">'+
-        //        //    "<div class='column'>"+
-        //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
-        //        //    "</div>"+
-        //        //    "<div class='column'>"+
-        //        //        "<span></span>"+
-        //        //    "</div>"+
-        //        //"</div>"+
-        //    '</div> ' +
-        //    '</div><hr>');
-        //var itemElement ='<div class="item"> ' +
-        //    '<div class="content"> ' +
-        //        //'<div class="ui grid">'+
-        //        //    "<div class='column'>"+
-        //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
-        //        //    "</div>"+
-        //        //    "<div class='column'>"+
-        //        //        "<span></span>"+
-        //        //    "</div>"+
-        //        //"</div>"+
-        //    '</div> ' +
-        //    '</div><hr>';
-        //itemLists.push(itemElement);
-        //listView.append($element);
-    }
-    toSet+='</div>';
-    eventHtml = toSet;
 }
 
 //function which gathers information about several different local elements, look at list at top to see potential options
@@ -322,9 +337,10 @@ function getHousing(lat, long, radiusInMiles) {
     var xml = new XMLHttpRequest();
     //currently the distance is hardcoded but it must be changed in the future to whatever the user wants
     var apiString = 'https://zilyo.p.mashape.com/search?latitude='+lat+'&longitude='+long+"&maxdistance="+(parseFloat(radiusInMiles)/1.60);
+    var response;
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
-            console.log(JSON.parse(xml.responseText));
+            response = JSON.parse(xml.responseText);
         }
     };
     xml.open("GET", apiString, true); //AJAX Set request
@@ -345,5 +361,6 @@ function updateBasedOnLocation(city, lat, long) {
     updateNews(city, 'rt_US');
     updateFood(city, lat, long);
     updateEvents(city, lat, long, 10);
+    getHousing(lat, long, 15);
     //updateLocalLocations(lat, long, 10, ['church']);
 }
