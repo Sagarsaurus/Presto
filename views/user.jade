@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    div.header
+        div.container
+            div.row
+                div.logo.span4
+                    h1
+                        a(href="")
+                            | Presto
+                            span.blue
+                div.links.span8
+                    a.home(href='', rel='tooltip', data-placement='bottom', data-original-title='Home')
+                    a.business(href='', rel='tooltip', data-placement='bottom', data-original-title='Business')
+    div.main-container.container
+        div.row
+            //
+                div.register.span4
+                    form(action="", method="post")
+                        h2
+                            | User Registration
+                        label(for="email") Email
+                        input#email(type="email", name="email", placeholder="Email")
+                        label(for="username") Username
+                        input#username(type="text", name="username", placeholder="Username")
+                        label(for="password") Password
+                        input#password(type="password", name="password", placeholder="Password")
+                        label(for="confirm") Confirm Password
+                        input#confirm(type="password", name="confirm", placeholder="Confirm Password")
+                        button(type="submit") Register
+            div.login.span3
+                form(action="", method="post")
+                    h2
+                        | User Login
+                    label(for="usernameLogin") Username
+                    input#usernameLogin(type="text", name="username", placeholder="Username")
+                    label(for="passwordLogin") Password
+                    input#passwordLogin(type="password", name="password", placeholder="Password")
+                    button(type="submit") Register
