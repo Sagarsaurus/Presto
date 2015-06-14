@@ -400,34 +400,31 @@ function updateHousing(lat, long, radiusInMiles) {
     xml.send();
 }
 
-//janky fix
-function updateInformation(city, state) {
-    var xml = new XMLHttpRequest();
-    var apiString = 'https://maps.googleapis.com/maps/api/geocode/json?address='+city+','+state+'&key=AIzaSyCoUofCZSTI0oBhfJGuwRp58TqgTnCiH64';
-    xml.onreadystatechange=function() {
-        if (xml.readyState == 4 && xml.status == 200) {
-            var response = JSON.parse(xml.responseText);
-            var lat = response['results'][0]['geometry']['location'].lat;
-            var long = response['results'][0]['geometry']['location'].lng;
-            updateNews(city, 'rt_US');
-            updateFood(city, lat, long);
-            updateEvents(city, lat, long, null);
-            updateHousing(lat, long, 15);
-            //updateLocalLocations()
-        }
-    };
-    xml.open("GET", apiString, true); //AJAX Set request
-    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xml.send();
-}
-
-function updateDeals(lat, long, radiusInMiles) {
+function addDeal(description, industry, affiliated_with, posted_by, latitude, longitude, valid_until, url) {
     var xml = new XMLHttpRequest();
     var nameValuePairs = 'latitude='+lat+'&longitude='+long+'&radius='+radiusInMiles;
     xml.onreadystatechange=function() {
         if (xml.readyState == 4 && xml.status == 200) {
             var response = JSON.parse(xml.responseText);
+            //this is not complete yet.  We need to handle two cases: one where it succeeds and returns a success message
+            //and the second where it returns an error.  This is what we need to handle, and this needs to be called
+            //with appropriate values for the parameters from the user's side.
             console.log(response);
+        }
+    };
+    xml.open("POST", 'api/addDeal', true); //AJAX Set request
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.send(nameValuePairs);
+}
+
+function updateDeals(lat, long, radiusInMiles) {
+    document.getElementById('dealContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Lodging</div>';
+    var xml = new XMLHttpRequest();
+    var nameValuePairs = 'latitude='+lat+'&longitude='+long+'&radius='+radiusInMiles;
+    xml.onreadystatechange=function() {
+        if (xml.readyState == 4 && xml.status == 200) {
+            var response = JSON.parse(xml.responseText);
+            //console.log(response);
             var toSet = "<div class='container'>";
             toSet += '<div class="ui large purple label" id="messageHeader">Local Deals <span><i class="dollar icon"></i></span></div> ';
             toSet += "<br/><br/>";
@@ -481,6 +478,28 @@ function updateDeals(lat, long, radiusInMiles) {
     xml.open("POST", 'api/getDeals', true); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send(nameValuePairs);
+}
+
+
+//janky fix
+function updateInformation(city, state) {
+    var xml = new XMLHttpRequest();
+    var apiString = 'https://maps.googleapis.com/maps/api/geocode/json?address='+city+','+state+'&key=AIzaSyCoUofCZSTI0oBhfJGuwRp58TqgTnCiH64';
+    xml.onreadystatechange=function() {
+        if (xml.readyState == 4 && xml.status == 200) {
+            var response = JSON.parse(xml.responseText);
+            var lat = response['results'][0]['geometry']['location'].lat;
+            var long = response['results'][0]['geometry']['location'].lng;
+            updateNews(city, 'rt_US');
+            updateFood(city, lat, long);
+            updateEvents(city, lat, long, null);
+            updateHousing(lat, long, 15);
+            //updateLocalLocations()
+        }
+    };
+    xml.open("GET", apiString, true); //AJAX Set request
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.send();
 }
 
 function updateBasedOnLocation(city, lat, long) {
