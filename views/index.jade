@@ -6,7 +6,7 @@ block content
             div.ui.one.column.row
                 div.column
                     input.ui.black.button(type="button", value="Explore Your Surroundings", onclick="getLocation()", id ="topBar")
-            div.ui.four.column.row
+            div.ui.five.column.row
                 div.column
                     input.ui.inverted.blue.button(type="button", value = "Food", id ="food")
                 div.column
@@ -15,6 +15,8 @@ block content
                     input.ui.inverted.green.button(type="button", value = "Events", id ="events")
                 div.column
                     input.ui.inverted.red.button(type="button", value = "Lodging", id ="lodging")
+                div.column
+                    input.ui.inverted.purple.button(type="button", value = "Deals", id ="deals")
             div.ui.one.column.row
                 div.column(id="infoDiv", style="visibility:hidden;")
                     div.ui.cube.shape(id="cubeShape")
@@ -27,6 +29,8 @@ block content
                                 div.content(id="eventContentLocation")
                             div.side(id="lodgingContent")
                                 div.content(id="lodgingContentLocation")
+                            div.side(id="dealContent")
+                                div.content(id="dealContentLocation")
     script.
         $('#food').click(function() {
             $(".shape")
@@ -47,4 +51,9 @@ block content
             $('.shape')
             .shape('set next side', '#lodgingContent')
             .shape('flip right');
+        });
+        $('#deals').click(function () {
+            $('.shape')
+                    .shape('set next side', '#dealContent')
+                    .shape('flip right');
         });

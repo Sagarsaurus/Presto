@@ -419,7 +419,68 @@ function updateInformation(city, state) {
     xml.open("GET", apiString, true); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send();
+}
 
+function updateDeals(lat, long, radiusInMiles) {
+    var xml = new XMLHttpRequest();
+    var nameValuePairs = 'latitude='+lat+'&longitude='+long+'&radius='+radiusInMiles;
+    xml.onreadystatechange=function() {
+        if (xml.readyState == 4 && xml.status == 200) {
+            var response = JSON.parse(xml.responseText);
+            console.log(response);
+            var toSet = "<div class='container'>";
+            toSet += '<div class="ui large purple label" id="messageHeader">Local Deals <span><i class="dollar icon"></i></span></div> ';
+            toSet += "<br/><br/>";
+            var responseList = response['message'];
+            for(var i = 0; i < responseList.length; i++) {
+                var item = responseList[i];
+                toSet+='<div class="item"> ' +
+                '<div class="content"> ' +
+                    //'<div class="ui grid">'+
+                    //    "<div class='column'>"+
+                '<a class="header" href="'+item.url+'">'+item.affiliated_with+': '+item.description+'</a> '+
+                    //    "</div>"+
+                    //    "<div class='column'>"+
+                    //        "<span></span>"+
+                    //    "</div>"+
+                    //"</div>"+
+                '</div> ' +
+                '</div><hr>';
+                //var $element =$('<div class="item"> ' +
+                //    '<div class="content"> ' +
+                //        //'<div class="ui grid">'+
+                //        //    "<div class='column'>"+
+                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //        //    "</div>"+
+                //        //    "<div class='column'>"+
+                //        //        "<span></span>"+
+                //        //    "</div>"+
+                //        //"</div>"+
+                //    '</div> ' +
+                //    '</div><hr>');
+                //var itemElement ='<div class="item"> ' +
+                //    '<div class="content"> ' +
+                //        //'<div class="ui grid">'+
+                //        //    "<div class='column'>"+
+                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //        //    "</div>"+
+                //        //    "<div class='column'>"+
+                //        //        "<span></span>"+
+                //        //    "</div>"+
+                //        //"</div>"+
+                //    '</div> ' +
+                //    '</div><hr>';
+                //itemLists.push(itemElement);
+                //listView.append($element);
+            }
+            toSet+='</div>';
+            //console.log(listView);
+            document.getElementById('dealContentLocation').innerHTML = toSet;
+        }
+    };
+    xml.open("POST", 'api/getDeals', true); //AJAX Set request
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.send(nameValuePairs);
 }
 
 function updateBasedOnLocation(city, lat, long) {
@@ -427,5 +488,6 @@ function updateBasedOnLocation(city, lat, long) {
     updateFood(city, lat, long);
     updateEvents(city, lat, long, 10);
     updateHousing(lat, long, 15);
+    updateDeals(lat, long, 5);
     //updateLocalLocations(lat, long, 10, ['church']);
 }

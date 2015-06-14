@@ -12,7 +12,7 @@ var geolib = require('geolib');
 var GooglePlaces = require('google-places');
 var eventbriteAPI = require('node-eventbrite');
 
-mongoose.model("Deal", {description : String, industry : String, affiliated_with : String, city: String, posted_by: String, latitude: Number, longitude: Number, valid_until: Date });
+mongoose.model("Deal", {description : String, industry : String, affiliated_with : String, city: String, posted_by: String, latitude: Number, longitude: Number, valid_until: Date, url: String});
 
 var api = {
     getNews: function(req, response) {
@@ -86,7 +86,7 @@ var api = {
     addDeal: function(req, response) {
         //need to add support to make sure duplicate does not exist
         //perhaps add upvote system for deals so best ones are towards top?
-        if(req.body.description.length==0 ||  req.body.industry.length==0 || req.body.affiliated_with.length==0 || req.body.posted_by.length==0 || req.body.latitude.length==0 || req.body.longitude == 0 || req.body.valid_until==0) {
+        if(req.body.description == null ||  req.body.industry == null || req.body.affiliated_with == null || req.body.posted_by == null || req.body.latitude == null || req.body.longitude == null || req.body.valid_until == null || req.body.url == null) {
             response.status(500).send({error: "Please make sure to provide all API parameters"});
         }
 
@@ -98,7 +98,8 @@ var api = {
             posted_by: req.body.posted_by,
             latitude: req.body.latitude,
             longitude: req.body.longitude,
-            valid_until: req.body.valid_until
+            valid_until: req.body.valid_until,
+            url: req.body.url
         });
 
         toAdd.save(function(err) {
