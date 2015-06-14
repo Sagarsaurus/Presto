@@ -338,7 +338,8 @@ function updateHousing(lat, long, radiusInMiles) {
     document.getElementById('infoDiv').style.visibility="visible";
     document.getElementById('lodgingContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Lodging</div>';
     //currently the distance is hardcoded but it must be changed in the future to whatever the user wants
-    var apiString = 'https://zilyo.p.mashape.com/search?latitude='+lat+'&longitude='+long+"&resultsperpage=50&sort=relevance&maxdistance="+(parseFloat(radiusInMiles)/1.60);
+    var apiString = 'https://zilyo.p.mashape.com/search?provider=airbnb%2Calwaysonvacation%2Capartmentsapart%2Cbedycasa%2Cbookingpal%2Ccitiesreference%2Cedomizil%2Cgeronimo%2Cgloveler%2Cholidayvelvet%2Chomeaway%2Chomestay%2Chostelworld%2Chousetrip%2Cinterhome%2Cnflats%2Croomorama%2Cstopsleepgo%2Ctheotherhome%2Ctravelmob%2Cvacationrentalpeople%2Cvaycayhero%2Cwaytostay%2Cwebchalet%2Czaranga' +
+        '&latitude='+lat+'&longitude='+long+"&resultsperpage=50&sort=relevance&maxdistance="+(parseFloat(radiusInMiles)/1.60);
     var response;
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
