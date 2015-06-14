@@ -71,7 +71,7 @@ function updateNews(city, newsType) {
             response = JSON.parse(xml.responseText);
             document.getElementById('infoDiv').style.visibility="visible";
             var toSet = "<div class='container'>";
-            toSet += '<div class="ui large green label" id="messageHeader">Local News <span><i class="newspaper icon"></i></span></div> ';
+            toSet += '<div class="ui large orange label" id="messageHeader">Local News <span><i class="newspaper icon"></i></span></div> ';
             toSet += "<br/><br/>";
             var responseList = response['message']['d']['results'];
             //var tempString = <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div>
@@ -231,7 +231,7 @@ function updateEvents(city, lat, long, radius) {
             }
 
             var toSet = "<div class='container'>";
-            toSet += '<div class="ui large orange label" id="messageHeader">Local Events <span><i class="ticket icon"></i></span></div> ';
+            toSet += '<div class="ui large green label" id="messageHeader">Local Events <span><i class="ticket icon"></i></span></div> ';
             toSet += "<br/><br/>";
 
             //console.log(restructure);
@@ -338,13 +338,13 @@ function updateHousing(lat, long, radiusInMiles) {
     document.getElementById('infoDiv').style.visibility="visible";
     document.getElementById('lodgingContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Lodging</div>';
     //currently the distance is hardcoded but it must be changed in the future to whatever the user wants
-    var apiString = 'https://zilyo.p.mashape.com/search?latitude='+lat+'&longitude='+long+"&maxdistance="+(parseFloat(radiusInMiles)/1.60);
+    var apiString = 'https://zilyo.p.mashape.com/search?latitude='+lat+'&longitude='+long+"&resultsperpage=50&sort=relevance&maxdistance="+(parseFloat(radiusInMiles)/1.60);
     var response;
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
             var toSet = "<div class='container'>";
-            toSet += '<div class="ui large pink label" id="messageHeader">Local Lodging <span><i class="home icon"></i></span></div> ';
+            toSet += '<div class="ui large red label" id="messageHeader">Local Lodging <span><i class="home icon"></i></span></div> ';
             toSet += "<br/><br/>";
             var responseList = response['result'];
             for(var i = 0; i < responseList.length; i++) {
