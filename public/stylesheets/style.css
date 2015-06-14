@@ -177,6 +177,16 @@ a {
 #eventContentLocation {
     width: 90em !important;
 }
+
+#lodgingContent {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#lodgingContentLocation {
+    width: 90em !important;
+}
+
 #infoDiv {
     margin-left: -10em !important;
 }

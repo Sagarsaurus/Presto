@@ -333,14 +333,64 @@ function getWeather(city, numberOfDays) {
     return response;
 }
 
-function getHousing(lat, long, radiusInMiles) {
+function updateHousing(lat, long, radiusInMiles) {
     var xml = new XMLHttpRequest();
+    document.getElementById('infoDiv').style.visibility="visible";
+    document.getElementById('lodgingContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Lodging</div>';
     //currently the distance is hardcoded but it must be changed in the future to whatever the user wants
     var apiString = 'https://zilyo.p.mashape.com/search?latitude='+lat+'&longitude='+long+"&maxdistance="+(parseFloat(radiusInMiles)/1.60);
     var response;
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
+            var toSet = "<div class='container'>";
+            toSet += '<div class="ui large pink label" id="messageHeader">Local Lodging <span><i class="home icon"></i></span></div> ';
+            toSet += "<br/><br/>";
+            var responseList = response['result'];
+            for(var i = 0; i < responseList.length; i++) {
+                var item = responseList[i];
+                toSet+='<div class="item"> ' +
+                '<div class="content"> ' +
+                    //'<div class="ui grid">'+
+                    //    "<div class='column'>"+
+                '<a class="header" href="'+item['provider'].url+'">'+item['provider'].full+' Listing: '+item['attr'].heading+'</a> '+
+                    //    "</div>"+
+                    //    "<div class='column'>"+
+                    //        "<span></span>"+
+                    //    "</div>"+
+                    //"</div>"+
+                '</div> ' +
+                '</div><hr>';
+                //var $element =$('<div class="item"> ' +
+                //    '<div class="content"> ' +
+                //        //'<div class="ui grid">'+
+                //        //    "<div class='column'>"+
+                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //        //    "</div>"+
+                //        //    "<div class='column'>"+
+                //        //        "<span></span>"+
+                //        //    "</div>"+
+                //        //"</div>"+
+                //    '</div> ' +
+                //    '</div><hr>');
+                //var itemElement ='<div class="item"> ' +
+                //    '<div class="content"> ' +
+                //        //'<div class="ui grid">'+
+                //        //    "<div class='column'>"+
+                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //        //    "</div>"+
+                //        //    "<div class='column'>"+
+                //        //        "<span></span>"+
+                //        //    "</div>"+
+                //        //"</div>"+
+                //    '</div> ' +
+                //    '</div><hr>';
+                //itemLists.push(itemElement);
+                //listView.append($element);
+            }
+            toSet+='</div>';
+            //console.log(listView);
+            document.getElementById('lodgingContentLocation').innerHTML = toSet;
         }
     };
     xml.open("GET", apiString, true); //AJAX Set request
@@ -350,17 +400,31 @@ function getHousing(lat, long, radiusInMiles) {
 }
 
 //janky fix
-function updateInformation(city) {
-    updateNews(city, 'rt_US');
-    updateFood(city, null, null);
-    updateEvents(city, null, null, null);
-    //updateLocalLocations()
+function updateInformation(city, state) {
+    var xml = new XMLHttpRequest();
+    var apiString = 'https://maps.googleapis.com/maps/api/geocode/json?address='+city+','+state+'&key=AIzaSyCoUofCZSTI0oBhfJGuwRp58TqgTnCiH64';
+    xml.onreadystatechange=function() {
+        if (xml.readyState == 4 && xml.status == 200) {
+            var response = JSON.parse(xml.responseText);
+            var lat = response['results'][0]['geometry']['location'].lat;
+            var long = response['results'][0]['geometry']['location'].lng;
+            updateNews(city, 'rt_US');
+            updateFood(city, lat, long);
+            updateEvents(city, lat, long, null);
+            updateHousing(lat, long, 15);
+            //updateLocalLocations()
+        }
+    };
+    xml.open("GET", apiString, true); //AJAX Set request
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.send();
+
 }
 
 function updateBasedOnLocation(city, lat, long) {
     updateNews(city, 'rt_US');
     updateFood(city, lat, long);
     updateEvents(city, lat, long, 10);
-    getHousing(lat, long, 15);
+    updateHousing(lat, long, 15);
     //updateLocalLocations(lat, long, 10, ['church']);
 }
