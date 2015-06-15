@@ -295,7 +295,7 @@ function updateEvents(city, lat, long, radius) {
 //pass in options as a list: for example, ['food', 'church'], etc
 //enter radius in miles, i'll handle the rest
 function updateLocalLocations(lat, long, rad, options) {
-    var center = new google.maps.LatLng(parseFloat(this.latitude), parseFloat(this.longitude));
+    var center = new google.maps.LatLng(parseFloat(lat), parseFloat(long));
     var map = new google.maps.Map(document.getElementById('map'), {
         center: center,
         zoom: 15
@@ -315,6 +315,8 @@ function success(results, status) {
         //THIS IS WHERE YOU SHOULD REPLACE THE HTML ON THE PAGE LIKE YOU DID FOR THE OTHER FUNCTIONS.
         //THIS IS ASYNCHRONOUS SO IT NEEDS TO BE HANDLED DIFFERENTLY.
         console.log(results);
+        var responseList = JSON.parse(results);
+
     }
     else {
         console.log(status);
@@ -494,7 +496,7 @@ function updateInformation(city, state) {
             updateFood(city, lat, long);
             updateEvents(city, lat, long, null);
             updateHousing(lat, long, 15);
-            //updateLocalLocations()
+            updateLocalLocations(lat, long, 10, ['lodging']);
         }
     };
     xml.open("GET", apiString, true); //AJAX Set request
@@ -508,5 +510,5 @@ function updateBasedOnLocation(city, lat, long) {
     updateEvents(city, lat, long, 10);
     updateHousing(lat, long, 15);
     updateDeals(lat, long, 5);
-    //updateLocalLocations(lat, long, 10, ['church']);
+    updateLocalLocations(lat, long, 10, ['lodging']);
 }
