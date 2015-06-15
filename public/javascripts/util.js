@@ -315,8 +315,6 @@ function success(results, status) {
         //THIS IS WHERE YOU SHOULD REPLACE THE HTML ON THE PAGE LIKE YOU DID FOR THE OTHER FUNCTIONS.
         //THIS IS ASYNCHRONOUS SO IT NEEDS TO BE HANDLED DIFFERENTLY.
         console.log(results);
-        var responseList = JSON.parse(results);
-
     }
     else {
         console.log(status);
