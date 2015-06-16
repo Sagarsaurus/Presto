@@ -333,7 +333,7 @@ function getWeather(city, numberOfDays) {
     return response;
 }
 
-function updateHousing(lat, long, radiusInMiles) {
+function updateHousing(city, lat, long, radiusInMiles) {
     var xml = new XMLHttpRequest();
     document.getElementById('infoDiv').style.visibility="visible";
     document.getElementById('lodgingContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Lodging</div>';
@@ -346,7 +346,7 @@ function updateHousing(lat, long, radiusInMiles) {
             response = JSON.parse(xml.responseText);
             var toSet = "<div class='container'>";
             toSet += '<div class="ui large red label" id="messageHeader">Local Lodging <span><i class="home icon"></i></span></div> ';
-            toSet += "<br/><br/>";
+            toSet += '<br/><br/><div class="ui two column middle aligned relaxed fitted stackable grid" style="position: relative"><div class="center aligned column"><div class="ui massive blue label">Non-Traditional Housing</div><br/><br/>';
             var responseList = response['result'];
             for(var i = 0; i < responseList.length; i++) {
                 var item = responseList[i];
@@ -389,9 +389,51 @@ function updateHousing(lat, long, radiusInMiles) {
                 //itemLists.push(itemElement);
                 //listView.append($element);
             }
-            toSet+='</div>';
-            //console.log(listView);
-            document.getElementById('lodgingContentLocation').innerHTML = toSet;
+
+            toSet+='</div><div class="ui vertical divider">Or</div>';
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var response = JSON.parse(xmlhttp.responseText);
+                    var responseList = response['message']['businesses'];
+                    toSet+='<div class="center aligned column"><div class="ui massive blue label">Traditional Housing</div><br/><br/>';
+                    for(var j = 0; j < responseList.length; j++) {
+                        var item = responseList[j];
+                        toSet+='<div class="item"> ' +
+                        '<div class="content"> <div class="ui grid" style="width:100%; text-align: center;"> <div class="column" style="font-size: large; width: 50%;">' +
+                            //'<div class="ui grid">'+
+                            //    "<div class='column'>"+
+                        '<a class="header" href="'+item['url']+'">'+item['name']+'</a> ' +
+                            //    "</div>"+
+                            //    "<div class='column'>"+
+                            //        "<span></span>"+
+                            //    "</div>"+
+                            //"</div>"+
+                        '</div>';
+                        //for(var j = 0; j < item['categories'].length; j++) {
+                        //    toSet+='<div class="item"> <i class="right triangle icon"></i>   <div class="content"> <div class="description">'+item['categories'][j][0]+'</div> </div> </div>';
+                        //}
+                        toSet+='<div class="column" style="font-style: italic; font-size: large; width: 50%;"><div class="content">';
+                        var parsedInt = parseInt(item['rating']);
+                        //console.log(parsedInt);
+                        for(var x = 0; x < parsedInt; x++) {
+                            toSet+= '<i class="star icon" style="color: red"></i>';
+                        }
+                        for(var y = 0; y < 5-parsedInt; y++) {
+                            toSet += '<i class="star icon" style="color:black"></i>';
+                        }
+                        toSet += '</div></div></div></div></div><hr>';
+                    }
+                    toSet+='</div></div></div>';
+                    //console.log(listView);
+                    document.getElementById('lodgingContentLocation').innerHTML = toSet;
+                }
+            };
+            xmlhttp.open("POST", 'api/getHotels', true); //AJAX Set request
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            var nameValuePairs = "city="+city+'&coordinates='+lat+','+long;
+            xmlhttp.send(nameValuePairs);
         }
     };
     xml.open("GET", apiString, true); //AJAX Set request
@@ -506,7 +548,7 @@ function updateBasedOnLocation(city, lat, long) {
     updateNews(city, 'rt_US');
     updateFood(city, lat, long);
     updateEvents(city, lat, long, 10);
-    updateHousing(lat, long, 15);
+    updateHousing(city, lat, long, 15);
     updateDeals(lat, long, 5);
     updateLocalLocations(lat, long, 10, ['lodging']);
 }

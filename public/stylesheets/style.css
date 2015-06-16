@@ -16,9 +16,9 @@ a {
 }
 
 .topContainer {
-    margin-right: 20%;
-    margin-left: 20%;
-    width: 60%;
+    margin-right: 5%;
+    margin-left: 5%;
+    width: 90%;
 }
 
 /*******************************
@@ -30,6 +30,7 @@ a {
     display: inline-block;
     -webkit-perspective: 2000px;
     perspective: 2000px;
+    width: 100%;
 }
 .ui.shape .sides {
     -webkit-transform-style: preserve-3d;
@@ -152,13 +153,13 @@ a {
     display: block;
 }
 
-#newsContentLocation {
-    width: 90em !important;
-}
+/*#newsContentLocation {*/
+    /*width: 90em !important;*/
+/*}*/
 
-#foodContentLocation {
-    width: 90em !important;
-}
+/*#foodContentLocation {*/
+    /*width: 90em !important;*/
+/*}*/
 
 #foodContent {
     background-color: transparent !important;
@@ -175,31 +176,31 @@ a {
     box-shadow: none !important;
 }
 
-#eventContentLocation {
-    width: 90em !important;
-}
+/*#eventContentLocation {*/
+    /*width: 90em !important;*/
+/*}*/
 
 #lodgingContent {
     background-color: transparent !important;
     box-shadow: none !important;
 }
 
-#lodgingContentLocation {
-    width: 90em !important;
-}
+/*#lodgingContentLocation {*/
+    /*width: 90em !important;*/
+/*}*/
 
 #dealContent {
     background-color: transparent !important;
     box-shadow: none !important;
 }
 
-#dealContentLocation {
-    width: 90em !important;
-}
+/*#dealContentLocation {*/
+    /*width: 90em !important;*/
+/*}*/
 
-#infoDiv {
-    margin-left: -10em !important;
-}
+/*#infoDiv {*/
+    /*margin-left: -10em !important;*/
+/*}*/
 
 .item {
     font-size: large;

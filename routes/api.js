@@ -46,7 +46,7 @@ var api = {
     },
 
     getFood: function(req, response) {
-        if(req.body.city.length==0) {
+        if(req.body.city == null) {
             response.status(500).send({error: "Please make sure to provide all API parameters"});
         }
 
@@ -71,6 +71,44 @@ var api = {
 
         else {
             yelp.search({term: "food", location: req.body.city, sort: 2}, function(err, data) {
+                if(err) {
+                    response.status(500).send({error: err});
+                }
+                else {
+                    response.status(200).send({message: data});
+                }
+            });
+        }
+        // See http://www.yelp.com/developers/documentation/v2/search_api
+
+    },
+
+    getHotels: function(req, response) {
+        if(req.body.city == null) {
+            response.status(500).send({error: "Please make sure to provide all API parameters"});
+        }
+
+        var yelp = require("yelp").createClient({
+            consumer_key: "JwN_Os8j4VRnuPV8j_TITQ",
+            consumer_secret: "pGJ3NJd0T8YaGG5x1JSfiLyIQws",
+            token: "JVLRsJxbzgWN_9xdbXwGHvWyQwkM2NZN",
+            token_secret: "vR1eqDCCYrG7LEOZQygl_NMHmWY"
+        });
+
+
+        if(req.body.coordinates != null) {
+            yelp.search({term: "hotels", location: req.body.city, cll: req.body.coordinates, sort: 2}, function(err, data) {
+                if(err) {
+                    response.status(500).send({error: err});
+                }
+                else {
+                    response.status(200).send({message: data});
+                }
+            });
+        }
+
+        else {
+            yelp.search({term: "hotels", location: req.body.city, sort: 2}, function(err, data) {
                 if(err) {
                     response.status(500).send({error: err});
                 }
@@ -140,5 +178,6 @@ router.post('/getNews', api.getNews);
 router.post('/getFood', api.getFood);
 router.post('/addDeal', api.addDeal);
 router.post('/getDeals', api.getDeals);
+router.post('/getHotels', api.getHotels);
 
 module.exports = router;
