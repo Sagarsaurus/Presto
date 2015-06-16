@@ -531,7 +531,7 @@ function updateInformation(city, state) {
             updateFood(city, lat, long);
             updateEvents(city, lat, long, null);
             updateHousing(lat, long, 15);
-            updateLocalLocations(lat, long, 10, ['lodging']);
+            //updateLocalLocations(lat, long, 10, ['lodging']);
         }
     };
     xml.open("GET", apiString, true); //AJAX Set request
@@ -545,5 +545,5 @@ function updateBasedOnLocation(city, lat, long) {
     updateEvents(city, lat, long, 10);
     updateHousing(city, lat, long, 15);
     updateDeals(lat, long, 5);
-    updateLocalLocations(lat, long, 10, ['lodging']);
+    //updateLocalLocations(lat, long, 10, ['lodging']);
 }
