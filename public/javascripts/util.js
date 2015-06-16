@@ -346,7 +346,7 @@ function updateHousing(city, lat, long, radiusInMiles) {
             response = JSON.parse(xml.responseText);
             var toSet = "<div class='container'>";
             toSet += '<div class="ui large red label" id="messageHeader">Local Lodging <span><i class="home icon"></i></span></div> ';
-            toSet += '<br/><br/><div class="ui two column middle aligned relaxed fitted stackable grid" style="position: relative"><div class="center aligned column"><div class="ui massive blue label">Non-Traditional Housing</div><br/><br/>';
+            toSet += '<br/><br/><div class="ui two column middle aligned relaxed fitted stackable grid" style="position: relative"><div class="center aligned column"><div class="ui massive blue label">Non-Traditional Lodging</div><br/><br/>';
             var responseList = response['result'];
             for(var i = 0; i < responseList.length; i++) {
                 var item = responseList[i];
@@ -397,7 +397,7 @@ function updateHousing(city, lat, long, radiusInMiles) {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     var response = JSON.parse(xmlhttp.responseText);
                     var responseList = response['message']['businesses'];
-                    toSet+='<div class="center aligned column"><div class="ui massive blue label">Traditional Housing</div><br/><br/>';
+                    toSet+='<div class="center aligned column"><div class="ui massive blue label">Traditional Lodging</div><br/><br/>';
                     for(var j = 0; j < responseList.length; j++) {
                         var item = responseList[j];
                         toSet+='<div class="item"> ' +
