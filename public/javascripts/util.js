@@ -510,6 +510,7 @@ function updateDeals(lat, long, radiusInMiles) {
 function updateInformation(city, state) {
     var xml = new XMLHttpRequest();
     var apiString = 'https://maps.googleapis.com/maps/api/geocode/json?address='+city+','+state+'&key=AIzaSyCoUofCZSTI0oBhfJGuwRp58TqgTnCiH64';
+    document.getElementById('resultDiv').setAttribute("style", "visibility: visible");
     xml.onreadystatechange=function() {
         if (xml.readyState == 4 && xml.status == 200) {
             var response = JSON.parse(xml.responseText);
@@ -529,6 +530,7 @@ function updateInformation(city, state) {
 }
 
 function updateBasedOnLocation(city, lat, long) {
+    document.getElementById('resultDiv').setAttribute("style", "visibility: visible");
     updateNews(city, 'rt_US');
     updateFood(city, lat, long);
     updateEvents(city, lat, long, 10);
