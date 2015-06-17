@@ -1,5 +1,146 @@
 extends layout
 block content
+    div#wrap
+        nav.navbar.bg-color1.dark-bg.navbar-fixed-top.navbar-slide.navbar-transparent
+            div.container
+                a.navbar-brand.goto(href="#intro-center")
+                    img(src="images/logo.png", height="25", alt="Presto")
+                button.navbar-toggle.menu-collapse-btn.collapsed(data-toggle="collapse", data-target=".navMenuCollapse")
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                div.collapse.navbar-collapse.navMenuCollapse
+                    ul.nav
+                        li
+                            a(href="#motto-video") Motto
+                        li
+                            a(href="#about-left") About
+                        li
+                            a(href="#demo") Demo
+                        li
+                            a(href="#team") Team
+                        li
+                            a(href="#") User
+                        li
+                            a(href="#") Business
+        header#intro-center.intro-block.bg-color1.dark-bg.fixed-bg.double-padding.text-center(style="background-image: url(images/background.jpg);")
+            div.container
+                div.slogan
+                    h1 Presto
+                    h2 Try the Demo
+                a.goto(href="#demo")
+                    i.icon.big-icon.icon-arrow-down
+        section#motto-video.bg-color1.dark-bg.double-padding.text-center
+            div.container
+                div.row
+                    div.col-sm-12
+                        h2.big-title We are committed to providing you with a positive experience wherever you go!
+                        p.desc-text
+                            | Our service uses the most moder and efficient methods to produce the best results under your conditions.
+            div.video-bg
+        section#about-left.no-sep
+            div.container
+                div.row
+                    div.col-lg-4.col-md-5
+                        h2 User Experience
+                        p
+                            | Presto provides users with all the possible information needed for a specific location or your current location. This includes weather, local deals, popular restaurants, events, and much more. In addition, what information you want to see can be controlled by you.
+            div.container-half.container-halg-right.cover-bg(style="background-image: url(images/chinaRestaurant.jpg);")
+        section#content-half-right.bg-color2.dark-bg
+            div.container
+                div.row
+                    div.col-lg-4.col-lg-offset-8.col-md-5.col-md-offset-7
+                        h2 Business Experience
+                        p
+                            | Business owners can take advantage of Presto's functionality to promote their business to local tourists and become more aware throughout the community.
+            div.container-half.container-half-left.cover-bg(style="background-image: url(images/hong-kong.jpg);")
+        section#demo.clients-block.text-center.cover-bg(style="background-image: url(images/wood.jpg);")
+            h1 Demo Will Be Here
+        section#team.team-block
+            div.container
+                h2.title.text-center Team
+                div.row
+                    div.col-sm-4
+                        img.screen(src="images/karan.jpg", alt="Karan")
+                        h3.name Karan Pahawa
+                        h4.occupation Marketing/UI Designer
+                        ul.soc-list
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-twitter2
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-facebook2
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-googleplus2
+                                        li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-linkedin2
+                    div.col-sm-4
+                        img.screen(src="images/sagar.jpg", alt="Sagar")
+                        h3.name Sagar Laud
+                        h4.occupation Lead Backend Engineer
+                        ul.soc-list
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-twitter2
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-facebook2
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-googleplus2
+                                        li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-linkedin2
+                    div.col-sm-4
+                        img.screen(src="images/sunny.jpg", alt="Sunny")
+                        h3.name Abhishek Deo
+                        h4.occupation Frontend/Backend Engineer
+                        ul.soc-list
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-twitter2
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-facebook2
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-googleplus2
+                                        li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-linkedin2
+        footer#footer.bg-color1.dark-bg
+            div.container
+                div.row
+                    div.col-md-6.col-md-push-6.text-right
+                        ul.soc-list
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-twitter2
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-facebook2
+                            li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-googleplus2
+                                        li
+                                a(href="#", target="_blank")
+                                    i.icon.icon-linkedin2
+                    div.col-md-6.col-md-pull-6
+                        img.logo(src="images/logo.png", alt="Presto")
+                        span.editcontent
+                            | &#169; 2015 Presto
+                            br
+                            | Designed by
+                            a(href="", target="_blank") Presto Team
+    div#modalMessage.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                button.close(type="button", data-dismiss="modal", aria-hidden="true") &#215;
+                h3.modal-title &#160;
+//
     div(id='map')
     div.topContainer
         div.ui.grid
