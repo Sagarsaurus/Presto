@@ -57,20 +57,17 @@ function handle_errors(error)
 var listView;
 //update this to take in news type in the future, remove call in showPosition once sunny finishes dropdown
 function updateNews(city, newsType) {
-    document.getElementById('newsContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading News</div>';
+    document.getElementById('news').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading News</h2>';
     var xml = new XMLHttpRequest();
     var nameValuePairs = 'city='+city+'&newsType='+newsType;
     var response;
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
-            document.getElementById('infoDiv').style.visibility="visible";
             var toSet = "<div class='container'>";
-            toSet += '<div class="ui large orange label" id="messageHeader">Local News <span><i class="newspaper icon"></i></span></div> ';
-            toSet += "<br/><br/>";
             var responseList = response['message']['d']['results'];
             //var tempString = <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div>
-            var $el = $('#newsContentLocation');
+            var $el = $('#news');
             listView = new infinity.ListView($el);
             var item;
             var itemLists = [];
@@ -120,7 +117,7 @@ function updateNews(city, newsType) {
             }
             toSet+='</div>';
             //console.log(listView);
-            document.getElementById('newsContentLocation').innerHTML = toSet;
+            document.getElementById('news').innerHTML = toSet;
         }
     };
 
@@ -131,7 +128,7 @@ function updateNews(city, newsType) {
 
 //add support soon to allow them to order results by either distance or highest rating.  Filtering by cuisine should be done on the front end itself.
 function updateFood(city, lat, long) {
-    document.getElementById('foodContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Food Offerings</div>';
+    document.getElementById('food').innerHTML = '<div class="ui active inline loader"></div><br/><h2>Loading Food Offerings</h2>';
     var nameValuePairs = "";
     if(lat != null && long != null) {
         nameValuePairs = 'city='+city+'&coordinates='+lat+','+long;
@@ -147,10 +144,7 @@ function updateFood(city, lat, long) {
             response = JSON.parse(xml.responseText);
 
             var food = document.getElementById('food');
-            document.getElementById('infoDiv').style.visibility="visible";
             var toSet = "<div class='container'>";
-            toSet += '<div class="ui large blue label" id="messageHeader">Local Dining <span><i class="food icon"></i></span><br/><h6>Powered by Yelp <span><i class="red yelp icon"></i></span></h6></div> ';
-            toSet += "<br/><br/>";
             var responseList = response['message']['businesses'];
             for(var i = 0; i < responseList.length; i++) {
                 var item = responseList[i];
@@ -172,16 +166,16 @@ function updateFood(city, lat, long) {
                 var parsedInt = parseInt(item['rating']);
                 //console.log(parsedInt);
                 for(var x = 0; x < parsedInt; x++) {
-                    toSet+= '<i class="star icon" style="color: red"></i>';
+                    toSet+= '<span class="glyphicon glyphicon-star" style="color: red"></span>';
                 }
                 for(var y = 0; y < 5-parsedInt; y++) {
-                    toSet += '<i class="star icon" style="color:black"></i>';
+                    toSet += '<span class="glyphicon glyphicon-star-empty" style="color: black"></span>';
                 }
                 toSet += '</div></div></div></div></div><hr>';
             }
 
             toSet+='</div>';
-            document.getElementById('foodContentLocation').innerHTML = toSet;
+            document.getElementById('food').innerHTML = toSet;
         }
     };
 
@@ -191,7 +185,7 @@ function updateFood(city, lat, long) {
 }
 
 function updateEvents(city, lat, long, radius) {
-    document.getElementById('eventContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Event Offerings</div>';
+    document.getElementById('events').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Event Offerings</h2>';
     var xml = new XMLHttpRequest();
     var apiString = 'https://www.eventbriteapi.com/v3/events/search/?';
     if(lat != null && long != null && radius != null) {
@@ -226,8 +220,6 @@ function updateEvents(city, lat, long, radius) {
             }
 
             var toSet = "<div class='container'>";
-            toSet += '<div class="ui large green label" id="messageHeader">Local Events <span><i class="ticket icon"></i></span></div> ';
-            toSet += "<br/><br/>";
 
             //console.log(restructure);
             for(var j = 0; j < index; j++) {
@@ -278,7 +270,7 @@ function updateEvents(city, lat, long, radius) {
                 //listView.append($element);
             }
             toSet+='</div>';
-            document.getElementById('eventContentLocation').innerHTML = toSet;
+            document.getElementById('events').innerHTML = toSet;
         }
     };
     xml.open("GET", apiString, true); //AJAX Set request
@@ -330,8 +322,7 @@ function getWeather(city, numberOfDays) {
 
 function updateHousing(city, lat, long, radiusInMiles) {
     var xml = new XMLHttpRequest();
-    document.getElementById('infoDiv').style.visibility="visible";
-    document.getElementById('lodgingContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Lodging</div>';
+    document.getElementById('lodging').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Lodging</h2>';
     //currently the distance is hardcoded but it must be changed in the future to whatever the user wants
     var apiString = 'https://zilyo.p.mashape.com/search?provider=airbnb%2Calwaysonvacation%2Capartmentsapart%2Cbedycasa%2Cbookingpal%2Ccitiesreference%2Cedomizil%2Cgeronimo%2Cgloveler%2Cholidayvelvet%2Chomeaway%2Chomestay%2Chostelworld%2Chousetrip%2Cinterhome%2Cnflats%2Croomorama%2Cstopsleepgo%2Ctheotherhome%2Ctravelmob%2Cvacationrentalpeople%2Cvaycayhero%2Cwaytostay%2Cwebchalet%2Czaranga' +
         '&latitude='+lat+'&longitude='+long+"&resultsperpage=50&sort=relevance&maxdistance="+parseFloat(radiusInMiles)/1.60;
@@ -340,8 +331,7 @@ function updateHousing(city, lat, long, radiusInMiles) {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
             var toSet = "<div class='container'>";
-            toSet += '<div class="ui large red label" id="messageHeader">Local Lodging <span><i class="home icon"></i></span></div> ';
-            toSet += '<br/><br/><div class="ui two column middle aligned relaxed fitted stackable grid" style="position: relative"><div class="center aligned column"><div class="ui massive blue label">Non-Traditional Lodging</div><br/><br/>';
+            toSet += '<div class="ui two column middle aligned relaxed fitted stackable grid" style="position: relative"><div class="center aligned column"><div class="ui massive blue label">Non-Traditional Lodging</div><br/><br/>';
             var responseList = response['result'];
             for(var i = 0; i < responseList.length; i++) {
                 var item = responseList[i];
@@ -413,16 +403,16 @@ function updateHousing(city, lat, long, radiusInMiles) {
                         var parsedInt = parseInt(item['rating']);
                         //console.log(parsedInt);
                         for(var x = 0; x < parsedInt; x++) {
-                            toSet+= '<i class="star icon" style="color: red"></i>';
+                            toSet+= '<span class="glyphicon glyphicon-star" style="color: red"></span>';
                         }
                         for(var y = 0; y < 5-parsedInt; y++) {
-                            toSet += '<i class="star icon" style="color:black"></i>';
+                            toSet += '<span class="glyphicon glyphicon-star-empty" style="color: black"></span>';
                         }
                         toSet += '</div></div></div></div></div><hr>';
                     }
                     toSet+='</div></div></div>';
                     //console.log(listView);
-                    document.getElementById('lodgingContentLocation').innerHTML = toSet;
+                    document.getElementById('lodging').innerHTML = toSet;
                 }
             };
             xmlhttp.open("POST", 'api/getHotels', true); //AJAX Set request
@@ -455,7 +445,7 @@ function addDeal(description, industry, affiliated_with, posted_by, latitude, lo
 }
 
 function updateDeals(lat, long, radiusInMiles) {
-    document.getElementById('dealContentLocation').innerHTML = '<div class="ui active inline loader"> <br/>Loading Lodging</div>';
+    document.getElementById('deals').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Deals</h2>';
     var xml = new XMLHttpRequest();
     var nameValuePairs = 'latitude='+lat+'&longitude='+long+'&radius='+radiusInMiles;
     xml.onreadystatechange=function() {
@@ -463,8 +453,6 @@ function updateDeals(lat, long, radiusInMiles) {
             var response = JSON.parse(xml.responseText);
             //console.log(response);
             var toSet = "<div class='container'>";
-            toSet += '<div class="ui large purple label" id="messageHeader">Local Deals <span><i class="dollar icon"></i></span></div> ';
-            toSet += "<br/><br/>";
             var responseList = response['message'];
             for(var i = 0; i < responseList.length; i++) {
                 var item = responseList[i];
@@ -509,7 +497,7 @@ function updateDeals(lat, long, radiusInMiles) {
             }
             toSet+='</div>';
             //console.log(listView);
-            document.getElementById('dealContentLocation').innerHTML = toSet;
+            document.getElementById('deals').innerHTML = toSet;
         }
     };
     xml.open("POST", 'api/getDeals', true); //AJAX Set request
@@ -531,6 +519,7 @@ function updateInformation(city, state) {
             updateFood(city, lat, long);
             updateEvents(city, lat, long, null);
             updateHousing(city, lat, long, 15);
+            updateDeals(lat, long, 5);
             //updateLocalLocations(lat, long, 10, ['lodging']);
         }
     };

@@ -55,7 +55,62 @@ block content
                             | Business owners can take advantage of Presto's functionality to promote their business to local tourists and become more aware throughout the community.
             div.container-half.container-half-left.cover-bg(style="background-image: url(images/hong-kong.jpg);")
         section#demo.clients-block.text-center.cover-bg(style="background-image: url(images/wood.jpg);")
-            h1 Demo Will Be Here
+            h1 Demo
+            //have to figure out how to organize dropdown such that it looks a little nicer.  this is a good start thought
+            ul.nav.nav-tabs.nav-stacked.nav-justified
+                li.dropdown
+                    a.dropdown-toggle(data-toggle="dropdown", href="#")
+                        |Select a City:
+                        span.caret
+                    ul.dropdown-menu
+                        li
+                            a(onclick="updateInformation('Atlanta', 'GA')")
+                                |Atlanta, GA
+                        li
+                            a(onclick="updateInformation('San Francisco', 'CA')")
+                                |San Francisco, CA
+                        li
+                            a(onclick="updateInformation('Philadephia', 'PA')")
+                                |Philadelphia, PA
+                        li
+                            a(onclick="updateInformation('New York City', 'NY')")
+                                | New York City, NY
+                li
+                    div.ui.massive.blue.label
+                        a(href="#food", data-toggle="tab")
+                            |Food &nbsp;
+                            span.glyphicon.glyphicon-cutlery
+                li
+                    div.ui.massive.orange.label
+                        a(href="#news", data-toggle="tab")
+                            |News &nbsp;
+                            span.glyphicon.glyphicon-list-alt
+                li
+                    div.ui.massive.green.label
+                        a(href="#events", data-toggle="tab")
+                            |Events &nbsp;
+                            span.glyphicon.glyphicon-music
+                li
+                    div.ui.massive.red.label
+                        a(href="#lodging", data-toggle="tab")
+                            |Lodging &nbsp;
+                            span.glyphicon.glyphicon-home
+                li
+                    div.ui.massive.purple.label
+                        a(href="#deals", data-toggle="tab")
+                            |Deals &nbsp;
+                            span.glyphicon.glyphicon-usd
+            div.tab-content(id="tabs")
+                div.tab-pane.active(id="food")
+
+                div.tab-pane(id="news")
+
+                div.tab-pane(id="events")
+
+                div.tab-pane(id="lodging")
+
+                div.tab-pane(id="deals")
+
         section#team.team-block
             div.container
                 h2.title.text-center Team
