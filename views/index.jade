@@ -1,15 +1,15 @@
 extends layout
 block content
     div#wrap
-        nav.navbar.bg-color1.dark-bg.navbar-fixed-top.navbar-slide.navbar-transparent
+        nav.navbar.bg-color1.dark-bg.navbar-fixed-top.navbar-slide.navbar-transparent(role="navigation")
             div.container
                 a.navbar-brand.goto(href="#intro-center")
                     img(src="images/logo1.png", height="25", alt="Presto")
-                button.navbar-toggle.menu-collapse-btn.collapsed(data-toggle="collapse", data-target=".navMenuCollapse")
+                button.navbar-toggle.menu-collapse-btn.collapsed(type="button", data-toggle="collapse", data-target=".navbar-collapse")
                     span.icon-bar
                     span.icon-bar
                     span.icon-bar
-                div.collapse.navbar-collapse.navMenuCollapse
+                div.navbar-collapse.collapse
                     ul.nav
                         li
                             a(href="#motto-video") Motto
