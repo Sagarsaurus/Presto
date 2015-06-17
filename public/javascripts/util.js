@@ -57,7 +57,10 @@ function handle_errors(error)
 var listView;
 //update this to take in news type in the future, remove call in showPosition once sunny finishes dropdown
 function updateNews(city, newsType) {
-    document.getElementById('news').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading News</h2>';
+        document.getElementById('news').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading News</h2>';
+        if(document.getElementById('news-collapse') != null) {
+            document.getElementById('news-collapse').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading News</h2>';
+        }
     var xml = new XMLHttpRequest();
     var nameValuePairs = 'city='+city+'&newsType='+newsType;
     var response;
@@ -118,6 +121,9 @@ function updateNews(city, newsType) {
             toSet+='</div>';
             //console.log(listView);
             document.getElementById('news').innerHTML = toSet;
+            if(document.getElementById('news-collapse') != null) {
+                document.getElementById('news-collapse').innerHTML = toSet;
+            }
         }
     };
 
@@ -129,6 +135,9 @@ function updateNews(city, newsType) {
 //add support soon to allow them to order results by either distance or highest rating.  Filtering by cuisine should be done on the front end itself.
 function updateFood(city, lat, long) {
     document.getElementById('food').innerHTML = '<div class="ui active inline loader"></div><br/><h2>Loading Food Offerings</h2>';
+    if(document.getElementById('news-collapse') != null) {
+        document.getElementById('food-collapse').innerHTML = '<div class="ui active inline loader"></div><br/><h2>Loading Food Offerings</h2>';
+    }
     var nameValuePairs = "";
     if(lat != null && long != null) {
         nameValuePairs = 'city='+city+'&coordinates='+lat+','+long;
@@ -176,6 +185,9 @@ function updateFood(city, lat, long) {
 
             toSet+='</div>';
             document.getElementById('food').innerHTML = toSet;
+            if(document.getElementById('food-collapse') != null) {
+                document.getElementById('food-collapse').innerHTML = toSet;
+            }
         }
     };
 
@@ -186,6 +198,9 @@ function updateFood(city, lat, long) {
 
 function updateEvents(city, lat, long, radius) {
     document.getElementById('events').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Event Offerings</h2>';
+    if(document.getElementById('events-collapse') != null) {
+        document.getElementById('events-collapse').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Event Offerings</h2>';
+    }
     var xml = new XMLHttpRequest();
     var apiString = 'https://www.eventbriteapi.com/v3/events/search/?';
     if(lat != null && long != null && radius != null) {
@@ -271,6 +286,9 @@ function updateEvents(city, lat, long, radius) {
             }
             toSet+='</div>';
             document.getElementById('events').innerHTML = toSet;
+            if(document.getElementById('events-collapse') != null) {
+                document.getElementById('events-collapse').innerHTML = toSet;
+            }
         }
     };
     xml.open("GET", apiString, true); //AJAX Set request
@@ -323,6 +341,9 @@ function getWeather(city, numberOfDays) {
 function updateHousing(city, lat, long, radiusInMiles) {
     var xml = new XMLHttpRequest();
     document.getElementById('lodging').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Lodging</h2>';
+    if(document.getElementById('lodging-collapse') != null) {
+        document.getElementById('lodging-collapse').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Lodging</h2>';
+    }
     //currently the distance is hardcoded but it must be changed in the future to whatever the user wants
     var apiString = 'https://zilyo.p.mashape.com/search?provider=airbnb%2Calwaysonvacation%2Capartmentsapart%2Cbedycasa%2Cbookingpal%2Ccitiesreference%2Cedomizil%2Cgeronimo%2Cgloveler%2Cholidayvelvet%2Chomeaway%2Chomestay%2Chostelworld%2Chousetrip%2Cinterhome%2Cnflats%2Croomorama%2Cstopsleepgo%2Ctheotherhome%2Ctravelmob%2Cvacationrentalpeople%2Cvaycayhero%2Cwaytostay%2Cwebchalet%2Czaranga' +
         '&latitude='+lat+'&longitude='+long+"&resultsperpage=50&sort=relevance&maxdistance="+parseFloat(radiusInMiles)/1.60;
@@ -413,6 +434,9 @@ function updateHousing(city, lat, long, radiusInMiles) {
                     toSet+='</div></div></div>';
                     //console.log(listView);
                     document.getElementById('lodging').innerHTML = toSet;
+                    if(document.getElementById('lodging-collapse') != null) {
+                        document.getElementById('lodging-collapse').innerHTML = toSet;
+                    }
                 }
             };
             xmlhttp.open("POST", 'api/getHotels', true); //AJAX Set request
@@ -446,6 +470,9 @@ function addDeal(description, industry, affiliated_with, posted_by, latitude, lo
 
 function updateDeals(lat, long, radiusInMiles) {
     document.getElementById('deals').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Deals</h2>';
+    if(document.getElementById('deals-collapse') != null) {
+        document.getElementById('deals-collapse').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Deals</h2>';
+    }
     var xml = new XMLHttpRequest();
     var nameValuePairs = 'latitude='+lat+'&longitude='+long+'&radius='+radiusInMiles;
     xml.onreadystatechange=function() {
@@ -498,6 +525,9 @@ function updateDeals(lat, long, radiusInMiles) {
             toSet+='</div>';
             //console.log(listView);
             document.getElementById('deals').innerHTML = toSet;
+            if(document.getElementById('deals-collapse') != null) {
+                document.getElementById('deals-collapse').innerHTML = toSet;
+            }
         }
     };
     xml.open("POST", 'api/getDeals', true); //AJAX Set request

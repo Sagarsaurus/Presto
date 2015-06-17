@@ -91,7 +91,7 @@ block content
             br
             br
             div.ui.tertiary.segment(id="resultDiv", style="visibility: hidden")
-                ul.nav.nav-tabs.nav-stacked.nav-justified
+                ul.nav.nav-tabs.nav-stacked.nav-justified(id="resultTabs")
                     li
                         div.ui.massive.blue.button(href="#food", data-toggle="tab", style="width: 80%")
                             |Food &nbsp;
@@ -208,3 +208,5 @@ block content
             div.modal-content
                 button.close(type="button", data-dismiss="modal", aria-hidden="true") &#215;
                 h3.modal-title &#160;
+    script.
+        $('#resultTabs').tabCollapse();
