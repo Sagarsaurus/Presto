@@ -61,18 +61,21 @@ block content
                     div.center.aligned.column
                         div.btn-group
                             button.btn.btn-danger.dropdown-toggle(type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="true")
-                                |Select a City:
+                                |Select a City:&nbsp;&nbsp;
                                 span.caret
                             ul.dropdown-menu
                                 li
                                     a(onclick="updateInformation('Atlanta', 'GA')")
                                         |Atlanta, GA
+                                li.divider(role="seperator")
                                 li
                                     a(onclick="updateInformation('San Francisco', 'CA')")
                                         |San Francisco, CA
+                                li.divider(role="seperator")
                                 li
                                     a(onclick="updateInformation('Philadephia', 'PA')")
                                         |Philadelphia, PA
+                                li.divider(role="seperator")
                                 li
                                     a(onclick="updateInformation('New York City', 'NY')")
                                         | New York City, NY
