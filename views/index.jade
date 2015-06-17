@@ -56,11 +56,11 @@ block content
             div.container-half.container-half-left.cover-bg(style="background-image: url(images/hong-kong.jpg);")
         section#demo.clients-block.text-center.cover-bg(style="background-image: url(images/wood.jpg);")
             h1 Demo
-            div.ui.secondary.inverted.segment(style="width: 50%; margin: 0 auto;")
-                div.ui.two.column.middle.aligned.relaxed.fitted.stackable.grid(style="position: relative")
+            div.ui.secondary.inverted.segment(style="width: 75%; margin: 0 auto;")
+                div.ui.two.column.middle.aligned.relaxed.fitted.stackable.grid(style="position: relative; ")
                     div.center.aligned.column
                         div.btn-group
-                            button.btn.btn-danger.dropdown-toggle(type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="true")
+                            button.btn.btn-danger.btn-lg.dropdown-toggle(type="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="true")
                                 |Select a City:&nbsp;&nbsp;
                                 span.caret
                             ul.dropdown-menu
@@ -82,7 +82,7 @@ block content
                     div.ui.vertical.divider(style="color: white")
                         |Or
                     div.center.aligned.column
-                        button.btn.btn-primary(onclick="getLocation()")
+                        button.btn.btn-lg.btn-primary(onclick="getLocation()")
                             |Explore Your Surroundings
 
 
