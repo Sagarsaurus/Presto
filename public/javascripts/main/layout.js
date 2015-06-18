@@ -51,7 +51,7 @@ $(document).ready(function(){
 //------------------------------------------------------------------------
 //						ANCHOR SMOOTHSCROLL SETTINGS
 //------------------------------------------------------------------------
-	$('a.goto, .navbar .nav a').smoothScroll({speed: 1200});
+	$('a.goto, .navbar .nav a, a, button').smoothScroll({speed: 1200});
 
 
 
