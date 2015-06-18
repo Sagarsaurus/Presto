@@ -56,7 +56,7 @@ block content
             div.container-half.container-half-left.cover-bg(style="background-image: url(images/hong-kong.jpg);")
         section#demo.clients-block.text-center.cover-bg(style="background-image: url(images/wood.jpg);")
             h1 Demo
-            div.ui.secondary.inverted.segment(style="width: 75%; margin: 0 auto;")
+            div.ui.secondary.inverted.segment(style="width: 80%; margin: 0 auto;")
                 div.ui.two.column.middle.aligned.relaxed.fitted.stackable.grid(style="position: relative; ")
                     div.center.aligned.column
                         div.btn-group
@@ -89,27 +89,26 @@ block content
             //have to figure out how to organize dropdown such that it looks a little nicer.  this is a good start thought
             br
             br
-            br
             div.ui.tertiary.segment(id="resultDiv", style="visibility: hidden")
                 ul.nav.nav-tabs.nav-stacked.nav-justified(id="resultTabs")
                     li
-                        div.ui.massive.blue.button(href="#food", data-toggle="tab", style="width: 80%")
+                        div.ui.circular.massive.blue.button(id="foodButton", href="#food", data-toggle="tab", style="width: 80%")
                             |Food &nbsp;
                             span.glyphicon.glyphicon-cutlery
                     li
-                        div.ui.massive.orange.button(href="#news", data-toggle="tab", style="width: 80%")
+                        div.ui.circular.massive.orange.button(id="newsButton", href="#news", data-toggle="tab", style="width: 80%")
                             |News &nbsp;
                             span.glyphicon.glyphicon-list-alt
                     li
-                        div.ui.massive.green.button(href="#events", data-toggle="tab", style="width: 80%")
+                        div.ui.circular.massive.green.button(id="eventsButton", href="#events", data-toggle="tab", style="width: 80%")
                             |Events &nbsp;
                             span.glyphicon.glyphicon-music
                     li
-                        div.ui.massive.red.button(href="#lodging", data-toggle="tab", style="width: 80%")
+                        div.ui.circular.massive.red.button(id="lodgingButton", href="#lodging", data-toggle="tab", style="width: 80%")
                             |Lodging &nbsp;
                             span.glyphicon.glyphicon-home
                     li
-                        div.ui.massive.purple.button(href="#deals", data-toggle="tab", style="width: 80%")
+                        div.ui.circular.massive.purple.button(id="dealsButton", href="#deals", data-toggle="tab", style="width: 80%")
                             |Deals &nbsp;
                             span.glyphicon.glyphicon-usd
 
