@@ -65,33 +65,33 @@ block content
                                 span.caret
                             ul.dropdown-menu
                                 li
-                                    a(href="#resultDiv", onclick="updateInformation('Atlanta', 'GA')")
+                                    a(href="#options", onclick="updateInformation('Atlanta', 'GA')")
                                         |Atlanta, GA
                                 li.divider(role="seperator")
                                 li
-                                    a(href="#resultDiv", onclick="updateInformation('San Francisco', 'CA')")
+                                    a(href="#options", onclick="updateInformation('San Francisco', 'CA')")
                                         |San Francisco, CA
                                 li.divider(role="seperator")
                                 li
-                                    a(href="#resultDiv", onclick="updateInformation('Philadephia', 'PA')")
+                                    a(href="#options", onclick="updateInformation('Philadephia', 'PA')")
                                         |Philadelphia, PA
                                 li.divider(role="seperator")
                                 li
-                                    a(href="#resultDiv", onclick="updateInformation('New York City', 'NY')")
+                                    a(href="#options", onclick="updateInformation('New York City', 'NY')")
                                         | New York City, NY
                     div.ui.vertical.divider(style="color: white")
                         |Or
                     div.center.aligned.column
-                        a(href="#resultDiv")
+                        a(href="#options")
                             button.btn.btn-lg.btn-primary(onclick="getLocation()")
                                 |Explore Your Surroundings
 
 
             //have to figure out how to organize dropdown such that it looks a little nicer.  this is a good start thought
-            br
+            br#options
             br
             div#resultDiv.ui.tertiary.segment(style="visibility: hidden")
-                ul.nav.nav-tabs.nav-stacked.nav-justified(id="resultTabs")
+                ul#resultTabs.nav.nav-tabs.nav-stacked.nav-justified()
                     li
                         div.ui.circular.massive.blue.button(id="foodButton", href="#food", data-toggle="tab", style="width: 80%")
                             |Food &nbsp;
@@ -113,7 +113,7 @@ block content
                             |Deals &nbsp;
                             span.glyphicon.glyphicon-usd
 
-                div.tab-content(id="tabs")
+                div#tabs.tab-content()
                     div.tab-pane.active(id="food")
 
                     div.tab-pane(id="news")
