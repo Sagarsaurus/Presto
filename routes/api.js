@@ -13,8 +13,30 @@ var GooglePlaces = require('google-places');
 var eventbriteAPI = require('node-eventbrite');
 
 mongoose.model("Deal", {description : String, industry : String, affiliated_with : String, city: String, posted_by: String, latitude: Number, longitude: Number, valid_until: Date, url: String});
+mongoose.model('InterestedUser', {firstName: String, lastName: String, email: String});
 
 var api = {
+    createInterestedUser: function(req, response) {
+        var model = mongoose.model('InterestedUser');
+        var insertContent = req.body;
+        var toSave = new model(insertContent);
+        model.findOne({'email' : req.body.email}, function(err, coll) {
+            if (coll) {
+                res.status(401).send({error: 'Email is already registered'});
+            }
+            else {
+                toSave.save(function (err, resource) {
+                    if(err!=null) {
+                        response.status(500).send({error:err});
+                    }
+                    else {
+                        response.status(200).send({message: 'Success!'});
+                    }
+                });
+            }
+        });
+    },
+
     getNews: function(req, response) {
         var Bing = require('node-bing-api')({ accKey: "khQagi4FvTxYWH52NvNtr3DO5Cud1mfLyL9VzXFF9Us" });
 
@@ -173,7 +195,7 @@ var api = {
     }
 };
 
-
+router.post('/createInterestedUser', api.createInterestedUser);
 router.post('/getNews', api.getNews);
 router.post('/getFood', api.getFood);
 router.post('/addDeal', api.addDeal);
