@@ -67,7 +67,7 @@ function updateNews(city, newsType) {
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
-            console.log(response);
+            //console.log(response);
             var toSet = "<div class='container'>";
             var responseList = response['message']['d']['results'];
             //var tempString = <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div>
@@ -152,7 +152,7 @@ function updateFood(city, lat, long) {
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
-            console.log(response);
+            //console.log(response);
             var food = document.getElementById('food');
             var toSet = "<div class='container'>";
             var responseList = response['message']['businesses'];
@@ -352,7 +352,7 @@ function updateHousing(city, lat, long, radiusInMiles) {
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
-            console.log(response);
+            //console.log(response);
             var toSet = "<div class='container'>";
             toSet += '<div class="ui two column middle aligned relaxed fitted stackable grid" style="position: relative"><div class="center aligned column"><div class="ui massive blue label">Non-Traditional Lodging</div><br/><br/>';
             var responseList = response['result'];
