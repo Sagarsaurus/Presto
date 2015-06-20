@@ -22,7 +22,7 @@ var api = {
         var toSave = new model(insertContent);
         model.findOne({'email' : req.body.email}, function(err, coll) {
             if (coll) {
-                res.status(401).send({error: 'Email is already registered'});
+                response.status(500).send({error: 'Email is already registered'});
             }
             else {
                 toSave.save(function (err, resource) {

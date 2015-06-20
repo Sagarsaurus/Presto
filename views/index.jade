@@ -181,13 +181,13 @@ block content
             div.container
                 h2.title Drop us your contact
                 p.sep-bottom Leave us your contact information and you will be among the first people who can try out our service.
-                form(role="form", id="contact_form" novalidate="")
+                form(role="form", id="contact_form" novalidate="", action="/api/createInterestedUser")
                     div.form-group
-                        input.form-control(type="text", id="first_name", placeholder="First Name", name="first")
+                        input.form-control(type="text", id="firstName", placeholder="First Name", name="firstName")
                     div.form-group
-                        input.form-control(type="text", id="last_name", placeholder="Last Name", name="last")
+                        input.form-control(type="text", id="lastName", placeholder="Last Name", name="lastName")
                     div.form-group
-                        input.form-control(type="email", id="contact_email", placeholder="email", name="email")
+                        input.form-control(type="email", id="email", placeholder="email", name="email")
                     button#contact_submit.btn.btn-lg.btn-block.btn-primary(type="submit", data-loading-text="•••")                            
                         i.icon.icon-paper-plane
                         |   Send

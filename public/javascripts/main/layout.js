@@ -224,9 +224,9 @@ if($('.video-bg')[0]) {
                 url: action,
                 type: 'POST',
                 data: {
-                    contactname: $('#first_name').val(),
-                    contactemail: $('#last_name').val(),
-                    contactmessage: $('#contact_email').val()
+                    firstName: $('#firstName').val(),
+                    lastName: $('#lastName').val(),
+                    email: $('#email').val()
                 },
                 success: function() {
                     $('#contact_submit').button('reset');
