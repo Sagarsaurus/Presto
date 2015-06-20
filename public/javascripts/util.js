@@ -67,6 +67,7 @@ function updateNews(city, newsType) {
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
+            //console.log(response);
             var toSet = "<div class='container'>";
             var responseList = response['message']['d']['results'];
             //var tempString = <div class="description">'+item['Description'].replace(/^(.{100}[^\s]*).*/, "$1")+'...</div>
@@ -79,7 +80,7 @@ function updateNews(city, newsType) {
                 item = response['message']['d']['results'][i];
 
                 // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
-                toSet+='<div class="item"> ' +
+                toSet+='<div class="ui segment" style="width: 50%; margin: 0 auto;"><div class="item"> ' +
                 '<div class="content"> ' +
                     //'<div class="ui grid">'+
                     //    "<div class='column'>"+
@@ -90,7 +91,7 @@ function updateNews(city, newsType) {
                     //    "</div>"+
                     //"</div>"+
                 '</div> ' +
-                '</div><hr>';
+                '</div></div><hr>';
                 //var $element =$('<div class="item"> ' +
                 //    '<div class="content"> ' +
                 //        //'<div class="ui grid">'+
@@ -151,14 +152,14 @@ function updateFood(city, lat, long) {
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
-
+            //console.log(response);
             var food = document.getElementById('food');
             var toSet = "<div class='container'>";
             var responseList = response['message']['businesses'];
             for(var i = 0; i < responseList.length; i++) {
                 var item = responseList[i];
-                toSet+='<div class="item"> ' +
-                '<div class="content"> <div class="ui grid" style="width:100%; text-align: center;"> <div class="column" style="font-size: large; width: 50%;">' +
+                toSet+='<div class="ui segment" style="width: 50%; margin: 0 auto;"><div class="item"> ' +
+                '<div class="content"> <div class="ui two column middle aligned relaxed fitted stackable grid" style="width:100%; text-align: center;"> <div class="ui center aligned column" style="font-size: large; width: 50%;">' +
                     //'<div class="ui grid">'+
                     //    "<div class='column'>"+
                 '<a class="header" href="'+item['url']+'">'+item['name']+'</a> ' +
@@ -171,7 +172,7 @@ function updateFood(city, lat, long) {
                 //for(var j = 0; j < item['categories'].length; j++) {
                 //    toSet+='<div class="item"> <i class="right triangle icon"></i>   <div class="content"> <div class="description">'+item['categories'][j][0]+'</div> </div> </div>';
                 //}
-                toSet+='<div class="column" style="font-style: italic; font-size: large; width: 50%;"><div class="content">';
+                toSet+='<div class="ui center aligned column" style="font-style: italic; font-size: large; width: 50%;"><div class="content">';
                 var parsedInt = parseInt(item['rating']);
                 //console.log(parsedInt);
                 for(var x = 0; x < parsedInt; x++) {
@@ -180,7 +181,7 @@ function updateFood(city, lat, long) {
                 for(var y = 0; y < 5-parsedInt; y++) {
                     toSet += '<span class="glyphicon glyphicon-star-empty" style="color: black"></span>';
                 }
-                toSet += '</div></div></div></div></div><hr>';
+                toSet += '</div></div></div></div></div></div><hr>';
             }
 
             toSet+='</div>';
@@ -241,7 +242,7 @@ function updateEvents(city, lat, long, radius) {
                 var item = restructure[indexArray[j]];
 
                 // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
-                toSet+='<div class="item"> ' +
+                toSet+='<div class="ui segment" style="width: 90%; margin: 0 auto;"><div class="item"> ' +
                 '<div class="content"> ' +
                     //'<div class="ui grid">'+
                     //    "<div class='column'>"+
@@ -255,7 +256,7 @@ function updateEvents(city, lat, long, radius) {
                 //        "<span></span>"+
                 //    "</div>"+
                 //"</div>"+
-                toSet+='</div></div></div></div>' +
+                toSet+='</div></div></div></div></div>' +
                 '</div><hr>';
                 //var $element =$('<div class="item"> ' +
                 //    '<div class="content"> ' +
@@ -351,12 +352,13 @@ function updateHousing(city, lat, long, radiusInMiles) {
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
+            //console.log(response);
             var toSet = "<div class='container'>";
             toSet += '<div class="ui two column middle aligned relaxed fitted stackable grid" style="position: relative"><div class="center aligned column"><div class="ui massive blue label">Non-Traditional Lodging</div><br/><br/>';
             var responseList = response['result'];
             for(var i = 0; i < responseList.length; i++) {
                 var item = responseList[i];
-                toSet+='<div class="item"> ' +
+                toSet+='<div class="ui segment"><div class="item"> ' +
                 '<div class="content"> ' +
                     //'<div class="ui grid">'+
                     //    "<div class='column'>"+
@@ -367,7 +369,7 @@ function updateHousing(city, lat, long, radiusInMiles) {
                     //    "</div>"+
                     //"</div>"+
                 '</div> ' +
-                '</div><hr>';
+                '</div></div><hr>';
                 //var $element =$('<div class="item"> ' +
                 //    '<div class="content"> ' +
                 //        //'<div class="ui grid">'+
@@ -406,8 +408,8 @@ function updateHousing(city, lat, long, radiusInMiles) {
                     toSet+='<div class="center aligned column"><div class="ui massive blue label">Traditional Lodging</div><br/><br/>';
                     for(var j = 0; j < responseList.length; j++) {
                         var item = responseList[j];
-                        toSet+='<div class="item"> ' +
-                        '<div class="content"> <div class="ui grid" style="width:100%; text-align: center;"> <div class="column" style="font-size: large; width: 50%;">' +
+                        toSet+='<div class="ui segment"><div class="item"> ' +
+                        '<div class="content"> <div class="ui two column middle aligned relaxed fitted stackable grid" style="width:100%; text-align: center;"> <div class="ui center aligned column" style="font-size: large; width: 50%;">' +
                             //'<div class="ui grid">'+
                             //    "<div class='column'>"+
                         '<a class="header" href="'+item['url']+'">'+item['name']+'</a> ' +
@@ -420,7 +422,7 @@ function updateHousing(city, lat, long, radiusInMiles) {
                         //for(var j = 0; j < item['categories'].length; j++) {
                         //    toSet+='<div class="item"> <i class="right triangle icon"></i>   <div class="content"> <div class="description">'+item['categories'][j][0]+'</div> </div> </div>';
                         //}
-                        toSet+='<div class="column" style="font-style: italic; font-size: large; width: 50%;"><div class="content">';
+                        toSet+='<div class="ui center aligned column" style="font-style: italic; font-size: large; width: 50%;"><div class="content">';
                         var parsedInt = parseInt(item['rating']);
                         //console.log(parsedInt);
                         for(var x = 0; x < parsedInt; x++) {
@@ -429,9 +431,9 @@ function updateHousing(city, lat, long, radiusInMiles) {
                         for(var y = 0; y < 5-parsedInt; y++) {
                             toSet += '<span class="glyphicon glyphicon-star-empty" style="color: black"></span>';
                         }
-                        toSet += '</div></div></div></div></div><hr>';
+                        toSet += '</div></div></div></div></div></div><hr>';
                     }
-                    toSet+='</div></div></div>';
+                    toSet+='</div></div></div></div>';
                     //console.log(listView);
                     document.getElementById('lodging').innerHTML = toSet;
                     if(document.getElementById('lodging-collapse') != null) {
