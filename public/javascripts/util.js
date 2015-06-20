@@ -41,10 +41,10 @@ function handle_errors(error)
 {
     switch(error.code)
     {
-        case error.PERMISSION_DENIED: alert("We could not gather your location.  Please make sure location services are enabled in your browser.");
+        case error.PERMISSION_DENIED: alert("We could not gather your location.  Please make sure location services are enabled in your browser and refresh the page.");
             break;
 
-        case error.POSITION_UNAVAILABLE: alert("We could not gather your location.  Please make sure location services are enabled in your browser.");
+        case error.POSITION_UNAVAILABLE: alert("We could not gather your location.  Please make sure location services are enabled in your browser and refresh the page.");
             break;
 
         case error.TIMEOUT: alert("Timed out trying to detect current position.");
