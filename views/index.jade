@@ -20,9 +20,7 @@ block content
                         li
                             a(href="#team") Team
                         li
-                            a(href="#") User
-                        li
-                            a(href="#") Business
+                            a(href="#contact") Contact Us
         header#intro-center.intro-block.bg-color1.dark-bg.fixed-bg.double-padding.text-center(style="background-image: url(images/background.jpg);")
             div.container
                 div.slogan
@@ -179,6 +177,20 @@ block content
                                         li
                                 a(href="#", target="_blank")
                                     i.icon.icon-linkedin2
+        section#contact.dark-bg.bg-color1.cover-bg(style="background-image: url(images/tokyoRestaurant.jpg)")
+            div.container
+                h2.title Drop us your contact
+                p.sep-bottom Leave us your contact information and you will be among the first people who can try out our service.
+                form(role="form", id="contact_form" novalidate="")
+                    div.form-group
+                        input.form-control(type="text", id="first_name", placeholder="First Name", name="first")
+                    div.form-group
+                        input.form-control(type="text", id="last_name", placeholder="Last Name", name="last")
+                    div.form-group
+                        input.form-control(type="email", id="contact_email", placeholder="email", name="email")
+                    button#contact_submit.btn.btn-lg.btn-block.btn-primary(type="submit", data-loading-text="•••")                            
+                        i.icon.icon-paper-plane
+                        |   Send
         footer#footer.bg-color1.dark-bg
             div.container
                 div.row

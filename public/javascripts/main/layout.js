@@ -178,8 +178,8 @@ if($('.video-bg')[0]) {
         onfocusout: false,
         onkeyup: false,
         rules: {
-            name: "required",
-            message: "required",
+            first: "required",
+            last: "required",
             email: {
                 required: true,
                 email: true
@@ -189,8 +189,8 @@ if($('.video-bg')[0]) {
             error.insertAfter(element);
         },
         messages: {
-            name: "What's your name?",
-            message: "Type your message",
+            name: "What's your first name?",
+            last: "What's your last name?",
             email: {
                 required: "What's your email?",
                 email: "Please, enter a valid email"
@@ -224,16 +224,16 @@ if($('.video-bg')[0]) {
                 url: action,
                 type: 'POST',
                 data: {
-                    contactname: $('#contact_name').val(),
-                    contactemail: $('#contact_email').val(),
-                    contactmessage: $('#contact_message').val()
+                    contactname: $('#first_name').val(),
+                    contactemail: $('#last_name').val(),
+                    contactmessage: $('#contact_email').val()
                 },
                 success: function() {
                     $('#contact_submit').button('reset');
 					$('#modalContact').modal('hide');
 					
 					//Use modal popups to display messages
-					$('#modalMessage .modal-title').html('<i class="icon icon-envelope-open"></i>Well done!<br>Your message has been successfully sent!');
+					$('#modalMessage .modal-title').html('<i class="icon icon-envelope-open"></i>Your information has been successfully sent!');
 					$('#modalMessage').modal('show');
                 },
                 error: function() {
