@@ -34,7 +34,7 @@ block content
                     div.col-sm-12
                         h2.big-title We are committed to providing you with a positive experience wherever you go!
                         p.desc-text
-                            | Our service uses the most moder and efficient methods to produce the best results under your conditions.
+                            | Our service uses the most modern and efficient methods to produce the best results under your conditions.
             div.video-bg
         section#about-left.no-sep
             div.container
@@ -177,20 +177,27 @@ block content
                                         li
                                 a(href="#", target="_blank")
                                     i.icon.icon-linkedin2
-        section#contact.dark-bg.bg-color1.cover-bg(style="background-image: url(images/tokyoRestaurant.jpg)")
-            div.container
-                h2.title Drop us your contact
-                p.sep-bottom Leave us your contact information and you will be among the first people who can try out our service.
-                form(role="form", id="contact_form" novalidate="", action="/api/createInterestedUser")
-                    div.form-group
-                        input.form-control(type="text", id="firstName", placeholder="First Name", name="firstName")
-                    div.form-group
-                        input.form-control(type="text", id="lastName", placeholder="Last Name", name="lastName")
-                    div.form-group
-                        input.form-control(type="email", id="email", placeholder="email", name="email")
-                    button#contact_submit.btn.btn-lg.btn-block.btn-primary(type="submit", data-loading-text="•••")                            
-                        i.icon.icon-paper-plane
-                        |   Send
+        section#contact.dark-bg.bg-color1.cover-bg
+            div.ui.tertiary.inverted.segment(style="width: 80%; margin: 0 auto;")
+                br
+                div.container.dark-bg.bg-color1.cover-bg
+                    br
+                    br
+                    h2.title Drop us your contact
+                    p.sep-bottom Leave us your contact information and you will be among the first people who can try out our service.
+                    form(role="form", id="contact_form" novalidate="", action="/api/createInterestedUser")
+                        div.form-group
+                            input.form-control(type="text", id="firstName", placeholder="First Name", name="firstName")
+                        div.form-group
+                            input.form-control(type="text", id="lastName", placeholder="Last Name", name="lastName")
+                        div.form-group
+                            input.form-control(type="email", id="email", placeholder="Email Address", name="email")
+                        button#contact_submit.btn.btn-lg.btn-block.btn-danger(type="submit", data-loading-text="•••")
+                            i.icon.icon-paper-plane
+                            |   Send
+                        br
+                        br
+                br
         footer#footer.bg-color1.dark-bg
             div.container
                 div.row

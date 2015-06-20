@@ -241,7 +241,7 @@ if($('.video-bg')[0]) {
 					$('#modalContact').modal('hide');
 					
 					//Use modal popups to display messages
-					$('#modalMessage .modal-title').html('<i class="icon icon-ban"></i>Oops!<br>Something went wrong!');
+					$('#modalMessage .modal-title').html('<i class="icon icon-ban"></i>Oops!<br>We already have that email in our system!');
 					$('#modalMessage').modal('show');
                 }
             });
