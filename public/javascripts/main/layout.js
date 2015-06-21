@@ -218,7 +218,7 @@ if($('.video-bg')[0]) {
     $('#contact_form').submit(function() {
         // submit the form
         if($(this).valid()){
-            $('#contact_submit').button('loading'); 
+            $('#contact_submit').button('loading');
             var action = $(this).attr('action');
             $.ajax({
                 url: action,
@@ -228,27 +228,41 @@ if($('.video-bg')[0]) {
                     lastName: $('#lastName').val(),
                     email: $('#email').val()
                 },
-                success: function() {
-                    $('#contact_submit').button('reset');
-					$('#modalContact').modal('hide');
-					
-					//Use modal popups to display messages
-					$('#modalMessage .modal-title').html('<i class="icon icon-envelope-open"></i>Your information has been successfully sent!');
-					$('#modalMessage').modal('show');
+                success: function(response, status, error) {
+                    if(response.message != null) {
+
+                        $('#contact_submit').button('reset');
+                        $('#modalContact').modal('hide');
+
+                        //Use modal popups to display messages
+                        $('#modalMessage .modal-title').html('<i class="icon icon-envelope-open"></i>Your information has been successfully sent!');
+                        $('#modalMessage').modal('show');
+                    }
+                    else {
+                        $('#contact_submit').button('reset');
+                        $('#modalContact').modal('hide');
+
+                        //Use modal popups to display messages
+
+                        $('#modalMessage .modal-title').html('<i class="icon icon-ban"></i>Oops!<br>We already have that email in our system!');
+                        $('#modalMessage').modal('show');
+                    }
                 },
-                error: function() {
+                error: function(response, status, error) {
                     $('#contact_submit').button('reset');
 					$('#modalContact').modal('hide');
-					
+
 					//Use modal popups to display messages
-					$('#modalMessage .modal-title').html('<i class="icon icon-ban"></i>Oops!<br>We already have that email in our system!');
+
+					$('#modalMessage .modal-title').html('<i class="icon icon-ban"></i>Oops!<br>Something Broke!');
 					$('#modalMessage').modal('show');
+                    return false;
                 }
             });
         } else {
             $('#contact_submit').button('reset')
         }
-        return false; 
-    });	    	  
+        return false;
+    });
 
 });
