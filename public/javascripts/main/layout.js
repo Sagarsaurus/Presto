@@ -244,7 +244,7 @@ if($('.video-bg')[0]) {
 
                         //Use modal popups to display messages
 
-                        $('#modalMessage .modal-title').html('<i class="icon icon-ban"></i>Oops!<br>We already have that email in our system!');
+                        $('#modalMessage .modal-title').html('<i class="icon icon-ban"></i>We already have that email in our system!');
                         $('#modalMessage').modal('show');
                     }
                 },
@@ -254,7 +254,7 @@ if($('.video-bg')[0]) {
 
 					//Use modal popups to display messages
 
-					$('#modalMessage .modal-title').html('<i class="icon icon-ban"></i>Oops!<br>Something Broke!');
+					$('#modalMessage .modal-title').html('<i class="icon icon-ban"></i>Something Broke!');
 					$('#modalMessage').modal('show');
                     return false;
                 }
