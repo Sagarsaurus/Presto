@@ -179,19 +179,20 @@ block content
                                     i.icon.icon-linkedin2
         section#contact.text-center.bg-color1.cover-bg.dark-bg(style="background-image: url(images/darkWood.jpg);")
             div.container
-                h2.title Drop us a Contact
-                p.sep-bottom
-                    | Presto is aiming to be the number one solution in gathering and providing the most updated information at any location.
-                form#contact_form(role="form", novalidate="")
-                    div.form-group
-                        input#first_name.form-control(type="text", placeholder="First Name", name="first")
-                    div.form-group
-                        input#last_name.form-control(type="text", placeholder="Last Name", name="last")
-                    div.form-group
-                        input#email.form-control(type="email", placeholder="email", name="email")
-                    button#contact_submit.btn.btn-lg.btn-block.btn-warning(type="submit", data-loading-text="•••")
-                        i.icon.icon-paper-plane
-                        |   Submit
+                div.ui.secondary.inverted.segment
+                    h2.title Drop Us Your Contact!
+                    p.sep-bottom
+                        | Presto is aiming to be the number one solution in gathering and providing the most up-to-date information in any location.
+                    form#contact_form(role="form", novalidate="")
+                        div.form-group
+                            input#first_name.form-control(type="text", placeholder="First Name", name="firstName")
+                        div.form-group
+                            input#last_name.form-control(type="text", placeholder="Last Name", name="lastName")
+                        div.form-group
+                            input#email.form-control(type="email", placeholder="Email Address", name="email")
+                        button#contact_submit.btn.btn-lg.btn-block.btn-warning(type="submit", data-loading-text="•••")
+                            i.icon.icon-paper-plane
+                            |   Submit
         footer#footer.bg-color1.dark-bg
             div.container
                 div.row

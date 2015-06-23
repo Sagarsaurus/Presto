@@ -219,9 +219,8 @@ if($('.video-bg')[0]) {
         // submit the form
         if($(this).valid()){
             $('#contact_submit').button('loading');
-            var action = $(this).attr('action');
             $.ajax({
-                url: action,
+                url: 'api/createInterestedUser',
                 type: 'POST',
                 data: {
                     firstName: $('#firstName').val(),
