@@ -203,89 +203,23 @@ function updateEvents(city, lat, long, radius) {
         document.getElementById('events-collapse').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Event Offerings</h2>';
     }
     var xml = new XMLHttpRequest();
-    var apiString = 'https://www.eventbriteapi.com/v3/events/search/?';
+    var apiString = 'http://api.eventful.com/json/events/search?';
     if(lat != null && long != null && radius != null) {
-        apiString += 'location.latitude='+lat+'&location.longitude='+long+'&location.within='+radius+'mi&sort_by=date';
+        apiString += 'where='+lat+','+long+'&within='+radius;
     }
     else {
-        apiString += 'venue.city='+city+'&sort_by=date';
+        apiString += 'location='+city+'&within='+radius;
     }
-    apiString+='&token=JJQXYFFDBPDNMWYPV6TZ';
+    apiString+='&app_key=r9GWjC5WKhRRZwfC';
     var response;
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
+            console.log(response);
             //uncomment this next line to see the contents of the JSON to add future functionality.
             //console.log(response);
-            var restructure = [];
-            var index = 0;
-            var indexArray = [];
-            //the following code restructures the data so that we remove duplicate items on the event list.
-            //now we simply need to iterate through the restructured array, indexing using the string from the indexArray to get a list of elements with the same names
-            //finally, we just have to list all future dates with some more iteration, but that hasn't been implemented yet.
-            for(var i = 0; i < response['events'].length; i++) {
-                item = response['events'][i];
-                if(restructure[item['name'].text]==null) {
-                    restructure[item['name'].text]=[];
-                    indexArray[index] = item['name'].text;
-                    index+=1;
-                }
 
-                restructure[item['name'].text].push(item);
-
-            }
-
-            var toSet = "<div class='container'>";
-
-            //console.log(restructure);
-            for(var j = 0; j < index; j++) {
-                var item = restructure[indexArray[j]];
-
-                // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
-                toSet+='<div class="ui segment" style="width: 90%; margin: 0 auto;"><div class="item"> ' +
-                '<div class="content"> ' +
-                    //'<div class="ui grid">'+
-                    //    "<div class='column'>"+
-                '<div class="ui massive blue label">'+item[0]['name'].text+'</div><br/><br/><div class="ui compact menu"><div class="ui simple dropdown item">Dates: <i class="dropdown icon"></i><div class="menu">';
-                for(var k=0; k < item.length; k++) {
-                    toSet+='<div class="item"><a href="'+item[k].url+'">'+item[k]["start"].local.slice(0, 10)+'</a></div>';
-
-                }
-                //    "</div>"+
-                //    "<div class='column'>"+
-                //        "<span></span>"+
-                //    "</div>"+
-                //"</div>"+
-                toSet+='</div></div></div></div></div>' +
-                '</div><hr>';
-                //var $element =$('<div class="item"> ' +
-                //    '<div class="content"> ' +
-                //        //'<div class="ui grid">'+
-                //        //    "<div class='column'>"+
-                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
-                //        //    "</div>"+
-                //        //    "<div class='column'>"+
-                //        //        "<span></span>"+
-                //        //    "</div>"+
-                //        //"</div>"+
-                //    '</div> ' +
-                //    '</div><hr>');
-                //var itemElement ='<div class="item"> ' +
-                //    '<div class="content"> ' +
-                //        //'<div class="ui grid">'+
-                //        //    "<div class='column'>"+
-                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
-                //        //    "</div>"+
-                //        //    "<div class='column'>"+
-                //        //        "<span></span>"+
-                //        //    "</div>"+
-                //        //"</div>"+
-                //    '</div> ' +
-                //    '</div><hr>';
-                //itemLists.push(itemElement);
-                //listView.append($element);
-            }
-            toSet+='</div>';
+            //toSet+='</div>';
             document.getElementById('events').innerHTML = toSet;
             if(document.getElementById('events-collapse') != null) {
                 document.getElementById('events-collapse').innerHTML = toSet;
@@ -294,6 +228,7 @@ function updateEvents(city, lat, long, radius) {
     };
     xml.open("GET", apiString, true); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.setRequestHeader("Access-Control-Allow-Origin", "*");
     xml.send();
 }
 
