@@ -203,33 +203,73 @@ function updateEvents(city, lat, long, radius) {
         document.getElementById('events-collapse').innerHTML = '<div class="ui active inline loader"></div> <br/><h2>Loading Event Offerings</h2>';
     }
     var xml = new XMLHttpRequest();
-    var apiString = 'http://api.eventful.com/json/events/search?';
+    var nameValuePairs = "";
     if(lat != null && long != null && radius != null) {
-        apiString += 'where='+lat+','+long+'&within='+radius;
+        nameValuePairs+= 'where='+lat+','+long+'&within='+radius+'&sort_order=date&page_size=100';
     }
     else {
-        apiString += 'location='+city+'&within='+radius;
+        nameValuePairs += 'location='+city+'&within='+radius+'&sort_order=date&page_size=100';
     }
-    apiString+='&app_key=r9GWjC5WKhRRZwfC';
     var response;
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
-            console.log(response);
-            //uncomment this next line to see the contents of the JSON to add future functionality.
+            var responseList = response['message']['search']['events']['event'];
             //console.log(response);
+            var toSet = "<div class='container'>";
+            for(var i = 0; i < responseList.length; i++) {
+                item = responseList[i];
 
-            //toSet+='</div>';
+                // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
+                toSet+='<div class="ui segment" style="width: 50%; margin: 0 auto;"><div class="item"> ' +
+                '<div class="content"> ' +
+                    //'<div class="ui grid">'+
+                    //    "<div class='column'>"+
+                '<a class="header" href="'+item['url']+'">'+item['title']+'</a> ' +
+                    //    "</div>"+
+                    //    "<div class='column'>"+
+                    //        "<span></span>"+
+                    //    "</div>"+
+                    //"</div>"+
+                '</div> ' +
+                '</div></div><hr>';
+                //var $element =$('<div class="item"> ' +
+                //    '<div class="content"> ' +
+                //        //'<div class="ui grid">'+
+                //        //    "<div class='column'>"+
+                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //        //    "</div>"+
+                //        //    "<div class='column'>"+
+                //        //        "<span></span>"+
+                //        //    "</div>"+
+                //        //"</div>"+
+                //    '</div> ' +
+                //    '</div><hr>');
+                //var itemElement ='<div class="item"> ' +
+                //    '<div class="content"> ' +
+                //        //'<div class="ui grid">'+
+                //        //    "<div class='column'>"+
+                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                //        //    "</div>"+
+                //        //    "<div class='column'>"+
+                //        //        "<span></span>"+
+                //        //    "</div>"+
+                //        //"</div>"+
+                //    '</div> ' +
+                //    '</div><hr>';
+                //itemLists.push(itemElement);
+                //listView.append($element);
+            }
+            toSet+='</div>';
             document.getElementById('events').innerHTML = toSet;
             if(document.getElementById('events-collapse') != null) {
                 document.getElementById('events-collapse').innerHTML = toSet;
             }
         }
     };
-    xml.open("GET", apiString, true); //AJAX Set request
+    xml.open("POST", 'api/getEvents', true); //AJAX Set request
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xml.setRequestHeader("Access-Control-Allow-Origin", "*");
-    xml.send();
+    xml.send(nameValuePairs);
 }
 
 //function which gathers information about several different local elements, look at list at top to see potential options
@@ -485,7 +525,7 @@ function updateInformation(city, state) {
             var long = response['results'][0]['geometry']['location'].lng;
             updateNews(city, 'rt_US');
             updateFood(city, lat, long);
-            updateEvents(city, lat, long, null);
+            updateEvents(city, lat, long, 10);
             updateHousing(city, lat, long, 15);
             updateDeals(lat, long, 5);
             //updateLocalLocations(lat, long, 10, ['lodging']);

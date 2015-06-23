@@ -105,6 +105,39 @@ var api = {
 
     },
 
+    getEvents: function(req, response) {
+        if(req.body.city != null) {
+            client.searchEvents({location: req.body.location, within: req.body.within, sort_order: req.body.sort_order, page_size: req.body.page_size }, function(err, data){
+
+                if(err){
+
+                    response.status(500).send({error: err});
+
+                }
+
+                else {
+                    response.status(200).send({message : data});
+                }
+
+            });
+        }
+
+        else {
+            client.searchEvents({where: req.body.where, within: req.body.within, sort_order: req.body.sort_order, page_size: req.body.page_size }, function(err, data) {
+
+                if (err) {
+
+                    response.status(500).send({error: err});
+
+                }
+
+                else {
+                    response.status(200).send({message: data});
+                }
+            });
+        }
+    },
+
     getHotels: function(req, response) {
         if(req.body.city == null) {
             response.status(500).send({error: "Please make sure to provide all API parameters"});
@@ -198,6 +231,7 @@ var api = {
 router.post('/createInterestedUser', api.createInterestedUser);
 router.post('/getNews', api.getNews);
 router.post('/getFood', api.getFood);
+router.post('/getEvents', api.getEvents);
 router.post('/addDeal', api.addDeal);
 router.post('/getDeals', api.getDeals);
 router.post('/getHotels', api.getHotels);
