@@ -205,7 +205,7 @@ function updateEvents(city, lat, long, radius) {
     var xml = new XMLHttpRequest();
     var nameValuePairs = "";
     if(lat != null && long != null && radius != null) {
-        nameValuePairs+= 'where='+lat+','+long+'&within='+radius+'&sort_order=date&page_size=100';
+        nameValuePairs+= 'where='+lat+','+long+'&within='+radius+'&sort_order=date&page_size=1000';
     }
     else {
         nameValuePairs += 'location='+city+'&within='+radius+'&sort_order=date&page_size=100';
@@ -214,52 +214,104 @@ function updateEvents(city, lat, long, radius) {
     xml.onreadystatechange=function() {
         if (xml.readyState==4 && xml.status==200) {
             response = JSON.parse(xml.responseText);
-            var responseList = response['message']['search']['events']['event'];
             //console.log(response);
+            var responseList = response['message']['search']['events']['event'];
             var toSet = "<div class='container'>";
-            for(var i = 0; i < responseList.length; i++) {
-                item = responseList[i];
+            if(responseList[0]['title']!=null) {
+                for(var i = 0; i < responseList.length; i++) {
+                    item = responseList[i];
 
-                // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
-                toSet+='<div class="ui segment" style="width: 50%; margin: 0 auto;"><div class="item"> ' +
-                '<div class="content"> ' +
-                    //'<div class="ui grid">'+
-                    //    "<div class='column'>"+
-                '<a class="header" href="'+item['url']+'">'+item['title']+'</a> ' +
-                    //    "</div>"+
-                    //    "<div class='column'>"+
-                    //        "<span></span>"+
-                    //    "</div>"+
-                    //"</div>"+
-                '</div> ' +
-                '</div></div><hr>';
-                //var $element =$('<div class="item"> ' +
-                //    '<div class="content"> ' +
-                //        //'<div class="ui grid">'+
-                //        //    "<div class='column'>"+
-                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
-                //        //    "</div>"+
-                //        //    "<div class='column'>"+
-                //        //        "<span></span>"+
-                //        //    "</div>"+
-                //        //"</div>"+
-                //    '</div> ' +
-                //    '</div><hr>');
-                //var itemElement ='<div class="item"> ' +
-                //    '<div class="content"> ' +
-                //        //'<div class="ui grid">'+
-                //        //    "<div class='column'>"+
-                //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
-                //        //    "</div>"+
-                //        //    "<div class='column'>"+
-                //        //        "<span></span>"+
-                //        //    "</div>"+
-                //        //"</div>"+
-                //    '</div> ' +
-                //    '</div><hr>';
-                //itemLists.push(itemElement);
-                //listView.append($element);
+                    // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
+                    toSet+='<div class="ui segment" style="width: 50%; margin: 0 auto;"><div class="item"> ' +
+                    '<div class="content"> ' +
+                        //'<div class="ui grid">'+
+                        //    "<div class='column'>"+
+                    '<a class="header" href="'+item['url']+'">'+item['title']+'</a> ' +
+                        //    "</div>"+
+                        //    "<div class='column'>"+
+                        //        "<span></span>"+
+                        //    "</div>"+
+                        //"</div>"+
+                    '</div> ' +
+                    '</div></div><hr>';
+                    //var $element =$('<div class="item"> ' +
+                    //    '<div class="content"> ' +
+                    //        //'<div class="ui grid">'+
+                    //        //    "<div class='column'>"+
+                    //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                    //        //    "</div>"+
+                    //        //    "<div class='column'>"+
+                    //        //        "<span></span>"+
+                    //        //    "</div>"+
+                    //        //"</div>"+
+                    //    '</div> ' +
+                    //    '</div><hr>');
+                    //var itemElement ='<div class="item"> ' +
+                    //    '<div class="content"> ' +
+                    //        //'<div class="ui grid">'+
+                    //        //    "<div class='column'>"+
+                    //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                    //        //    "</div>"+
+                    //        //    "<div class='column'>"+
+                    //        //        "<span></span>"+
+                    //        //    "</div>"+
+                    //        //"</div>"+
+                    //    '</div> ' +
+                    //    '</div><hr>';
+                    //itemLists.push(itemElement);
+                    //listView.append($element);
+                }
             }
+
+            else {
+                for(var i = 0; i < responseList.length; i++) {
+                    for(var j = 0; j < responseList[i]; j++) {
+                        item = responseList[i][j];
+
+                        // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
+                        toSet+='<div class="ui segment" style="width: 50%; margin: 0 auto;"><div class="item"> ' +
+                        '<div class="content"> ' +
+                            //'<div class="ui grid">'+
+                            //    "<div class='column'>"+
+                        '<a class="header" href="'+item['url']+'">'+item['title']+'</a> ' +
+                            //    "</div>"+
+                            //    "<div class='column'>"+
+                            //        "<span></span>"+
+                            //    "</div>"+
+                            //"</div>"+
+                        '</div> ' +
+                        '</div></div><hr>';
+                        //var $element =$('<div class="item"> ' +
+                        //    '<div class="content"> ' +
+                        //        //'<div class="ui grid">'+
+                        //        //    "<div class='column'>"+
+                        //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                        //        //    "</div>"+
+                        //        //    "<div class='column'>"+
+                        //        //        "<span></span>"+
+                        //        //    "</div>"+
+                        //        //"</div>"+
+                        //    '</div> ' +
+                        //    '</div><hr>');
+                        //var itemElement ='<div class="item"> ' +
+                        //    '<div class="content"> ' +
+                        //        //'<div class="ui grid">'+
+                        //        //    "<div class='column'>"+
+                        //    '<a class="header" href="'+item['Url']+'">'+item['Title']+'</a> ' +
+                        //        //    "</div>"+
+                        //        //    "<div class='column'>"+
+                        //        //        "<span></span>"+
+                        //        //    "</div>"+
+                        //        //"</div>"+
+                        //    '</div> ' +
+                        //    '</div><hr>';
+                        //itemLists.push(itemElement);
+                        //listView.append($element);
+                    }
+                }
+            }
+            //console.log(response);
+
             toSet+='</div>';
             document.getElementById('events').innerHTML = toSet;
             if(document.getElementById('events-collapse') != null) {
