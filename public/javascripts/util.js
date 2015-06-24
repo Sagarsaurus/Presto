@@ -264,9 +264,9 @@ function updateEvents(city, lat, long, radius) {
             }
 
             else {
-                for(var i = 0; i < responseList.length; i++) {
-                    for(var j = 0; j < responseList[i]; j++) {
-                        item = responseList[i][j];
+                responseList.forEach(function(element, index, array) {
+                    for(var i = 0; i < element.length; i++) {
+                        item = element[i];
 
                         // DO NOT DELETE THE COMMENTS BELOW. They may be useful later!
                         toSet+='<div class="ui segment" style="width: 50%; margin: 0 auto;"><div class="item"> ' +
@@ -308,11 +308,13 @@ function updateEvents(city, lat, long, radius) {
                         //itemLists.push(itemElement);
                         //listView.append($element);
                     }
-                }
+                });
+
             }
             //console.log(response);
 
             toSet+='</div>';
+            console.log(toSet);
             document.getElementById('events').innerHTML = toSet;
             if(document.getElementById('events-collapse') != null) {
                 document.getElementById('events-collapse').innerHTML = toSet;
